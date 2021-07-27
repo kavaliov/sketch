@@ -1,0 +1,29 @@
+.wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  width: 260px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), 0 -4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  height: 100%;
+  transform: translateX(105%);
+  transition: all ease 0.2s;
+  z-index: 100;
+
+  .header {
+    display: flex;
+    padding: 8px;
+
+    .close {
+      margin-left: auto;
+      box-shadow: none;
+    }
+  }
+
+  &.opened {
+    transform: translateX(0);
+  }
+}

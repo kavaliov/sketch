@@ -3,9 +3,9 @@ import { fabric } from "fabric";
 
 export type AnyDispatch = React.Dispatch<any>;
 
-export type Mode = "circle" | "drawing" | "hand" | "rect";
+export type Mode = "drawing" | "hand";
 
-export type BrushType = "pencil";
+export type BrushType = "eraser" | "marker" | "magic" | "pencil" | "pen" | "";
 
 export interface AppContext {
   canvas: fabric.Canvas;

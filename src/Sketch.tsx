@@ -1,6 +1,6 @@
 import React from "react";
 import { fabric } from "fabric";
-import { ColorPickerPanel } from "./components";
+import {ColorPickerPanel, RightControlPanel} from "./components";
 import { getId } from "duck/utils";
 import { AppContext } from "duck/context";
 import appReducer from "duck/reducer";
@@ -34,6 +34,7 @@ const Sketch: React.FC = () => {
           value={{ canvas: sketchRef.current, dispatch, state }}
         >
           <ColorPickerPanel />
+          <RightControlPanel />
         </AppContext.Provider>
       )}
     </div>

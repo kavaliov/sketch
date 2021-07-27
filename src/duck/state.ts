@@ -1,7 +1,7 @@
 import { State } from "./types";
 
 const appState: State = {
-  currentColor: "red",
+  currentColor: "#ff0000",
   mode: "hand",
   brushType: "pencil",
 };

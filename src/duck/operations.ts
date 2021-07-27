@@ -1,14 +1,13 @@
-import { fabric as fabricType } from "fabric";
+import { fabric } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
 import { ColorResult } from "react-color";
 
-const { fabric } = window as any;
-
 export const setSketchSettings = (
-  canvas: fabricType.Canvas | undefined
+  canvas: fabric.Canvas | undefined
 ): void => {
   if (canvas) {
     // Initial canvas setup
+    // @ts-ignore
     fabric.Object.prototype.cornerStyle = FABRIC_SETTINGS.CORNER_STYLE;
     fabric.Object.prototype.cornerSize = FABRIC_SETTINGS.CORNER_SIZE;
     canvas.selectionColor = FABRIC_SETTINGS.SELECTION_COLOR;
@@ -23,7 +22,7 @@ export const setSketchSettings = (
   }
 };
 
-const removeSelectedObject = (canvas: fabricType.Canvas) => {
+const removeSelectedObject = (canvas: fabric.Canvas) => {
   const selectedObject = canvas.getActiveObject();
 
   if (selectedObject && selectedObject.type === "activeSelection") {
@@ -38,7 +37,7 @@ const removeSelectedObject = (canvas: fabricType.Canvas) => {
 };
 
 export const changeActiveObjectColor = (
-  canvas: fabricType.Canvas,
+  canvas: fabric.Canvas,
   color: ColorResult
 ) => {
   const activeObject = canvas.getActiveObject();
@@ -64,16 +63,4 @@ const changeObjectColor = (object: any, color: ColorResult) => {
   if (object.type === "rect" || object.type === "circle") {
     object.set({ fill: color.hex });
   }
-};
-
-export const lockAllObjects = (canvas: fabricType.Canvas): void => {
-  canvas
-    .getObjects()
-    .map((object: fabricType.Object) => object.set("selectable", false));
-};
-
-export const unLockAllObjects = (canvas: fabricType.Canvas): void => {
-  canvas
-    .getObjects()
-    .map((object: fabricType.Object) => object.set("selectable", true));
 };

@@ -1,0 +1,17 @@
+.wrapper {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  background: #ffffff;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #e8f8ff;
+  }
+}
