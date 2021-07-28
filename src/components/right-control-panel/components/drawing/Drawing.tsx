@@ -20,6 +20,9 @@ const Drawing: React.FC = () => {
 
   React.useEffect(() => {
     canvas.isDrawingMode = mode === "drawing";
+    if (mode !== "drawing") {
+      setBrush("");
+    }
   }, [mode, canvas]);
 
   React.useEffect(() => {

@@ -65,7 +65,7 @@ const changeObjectColor = (object: any, color: ColorResult) => {
     object.set({ stroke: color.hex });
   }
 
-  if (object.type === "rect" || object.type === "circle") {
+  if (object.type === "rect" || object.type === "circle" || object.fromSVG) {
     object.set({ fill: color.hex });
   }
 };

@@ -1,0 +1,22 @@
+.shapeList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding: 16px;
+  gap: 8px;
+
+  .shape {
+    width: 51px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: all ease 0.2s;
+
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
