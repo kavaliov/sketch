@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/sketch/static/css/main.afc6e0b4.chunk.css",
+    "main.js": "/sketch/static/js/main.24ceb49d.chunk.js",
+    "main.js.map": "/sketch/static/js/main.24ceb49d.chunk.js.map",
+    "runtime-main.js": "/sketch/static/js/runtime-main.8ad7e194.js",
+    "runtime-main.js.map": "/sketch/static/js/runtime-main.8ad7e194.js.map",
+    "static/js/2.079c6132.chunk.js": "/sketch/static/js/2.079c6132.chunk.js",
+    "static/js/2.079c6132.chunk.js.map": "/sketch/static/js/2.079c6132.chunk.js.map",
+    "index.html": "/sketch/index.html",
+    "static/css/main.afc6e0b4.chunk.css.map": "/sketch/static/css/main.afc6e0b4.chunk.css.map",
+    "static/js/2.079c6132.chunk.js.LICENSE.txt": "/sketch/static/js/2.079c6132.chunk.js.LICENSE.txt",
+    "static/media/brush1.4bb3634c.svg": "/sketch/static/media/brush1.4bb3634c.svg",
+    "static/media/brush2.bd74d5cf.svg": "/sketch/static/media/brush2.bd74d5cf.svg",
+    "static/media/brush3.38a28f48.svg": "/sketch/static/media/brush3.38a28f48.svg",
+    "static/media/brush4.4c238ed7.svg": "/sketch/static/media/brush4.4c238ed7.svg",
+    "static/media/brush5.b0040eae.svg": "/sketch/static/media/brush5.b0040eae.svg",
+    "static/media/close.ae19aa75.svg": "/sketch/static/media/close.ae19aa75.svg",
+    "static/media/hand.cf210679.svg": "/sketch/static/media/hand.cf210679.svg",
+    "static/media/highlight.a5e0d7ce.svg": "/sketch/static/media/highlight.a5e0d7ce.svg",
+    "static/media/Drawing.module.css": "/sketch/static/media/sliderBg.ca9dacfe.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8ad7e194.js",
+    "static/js/2.079c6132.chunk.js",
+    "static/css/main.afc6e0b4.chunk.css",
+    "static/js/main.24ceb49d.chunk.js"
+  ]
+}
