@@ -16,7 +16,6 @@ export const setSketchSettings = (
     canvas.selectionColor = FABRIC_SETTINGS.SELECTION_COLOR;
     canvas.selectionBorderColor = FABRIC_SETTINGS.SELECTION_BORDER_COLOR;
     canvas.selectionLineWidth = FABRIC_SETTINGS.SELECTION_LINE_WIDTH;
-    canvas.selection = false;
     addCustomBrushes(fabric);
 
     document.addEventListener("keydown", (event) => {
@@ -61,11 +60,15 @@ export const changeActiveObjectColor = (
 };
 
 const changeObjectColor = (object: any, color: ColorResult) => {
-  if (object.type === "path") {
+  if (object.type === "path" && !object.shadow) {
     object.set({ stroke: color.hex });
   }
 
   if (object.type === "rect" || object.type === "circle" || object.fromSVG) {
     object.set({ fill: color.hex });
+  }
+
+  if(object.type === "path" && object.shadow) {
+      object.shadow.color = color.hex;
   }
 };
