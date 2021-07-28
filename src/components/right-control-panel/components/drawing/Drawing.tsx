@@ -1,15 +1,15 @@
 import React from "react";
-import { AppContext } from "../../../../duck/context";
-import { setMode } from "../../../../duck/actions";
-import { BrushType } from "../../../../duck/types";
-import { Panel, Button } from "../../../index";
+import classNames from "classnames";
+import ReactSlider from "react-slider";
+import "react-slider";
+import { Panel, Button } from "components";
+import { AppContext } from "duck/context";
+import { setMode } from "duck/actions";
+import { BrushType } from "duck/types";
 import { TOOLS } from "./duck/constants";
 import highlight from "./assets/highlight.svg";
-import styles from "./Drawing.module.css";
-import classNames from "classnames";
 import { changeCanvasBrush } from "./duck/operations";
-
-const BRUSH_SIZE = [10, 20, 30, 40, 50];
+import styles from "./Drawing.module.css";
 
 const Drawing: React.FC = () => {
   const [opened, setOpened] = React.useState(false);
@@ -20,7 +20,7 @@ const Drawing: React.FC = () => {
 
   React.useEffect(() => {
     canvas.isDrawingMode = mode === "drawing";
-  }, [mode]);
+  }, [mode, canvas]);
 
   React.useEffect(() => {
     changeCanvasBrush(canvas, brush, brushSize, currentColor);
@@ -38,17 +38,23 @@ const Drawing: React.FC = () => {
 
   return (
     <>
-      <Button onClick={() => setOpened(true)}>
+      <Button active={mode === "drawing"} onClick={() => setOpened(true)}>
         <img src={highlight} alt="" />
       </Button>
       <Panel opened={opened} onClose={() => setOpened(false)}>
         <div className={styles.panel}>
           <div className={styles.brushSize}>
-            {BRUSH_SIZE.map((size: number) => (
-              <Button key={size} onClick={() => sizeHandler(size)}>
-                {size}
-              </Button>
-            ))}
+            {brushSize}
+            <ReactSlider
+              className={styles.slider}
+              thumbClassName={styles.thumb}
+              orientation="vertical"
+              defaultValue={brushSize}
+              invert
+              min={1}
+              max={60}
+              onChange={sizeHandler}
+            />
           </div>
           <div className={styles.brushes}>
             {TOOLS.map((tool: any) => (

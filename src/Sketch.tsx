@@ -1,6 +1,5 @@
 import React from "react";
-import { fabric } from "fabric";
-import {ColorPickerPanel, RightControlPanel} from "./components";
+import { ColorPickerPanel, RightControlPanel } from "./components";
 import { getId } from "duck/utils";
 import { AppContext } from "duck/context";
 import appReducer from "duck/reducer";
@@ -8,6 +7,8 @@ import appState from "duck/state";
 import { CANVAS_SETTINGS } from "./duck/constants";
 import { setSketchSettings } from "./duck/operations";
 import styles from "./Sketch.module.css";
+
+const { fabric } = window;
 
 const Sketch: React.FC = () => {
   const [state, dispatch] = React.useReducer(appReducer, appState);

@@ -1,9 +1,12 @@
-import { fabric } from "fabric";
+import { fabric as FabricType } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
 import { ColorResult } from "react-color";
+import addCustomBrushes from "./addCustomBrushes";
+
+const { fabric } = window;
 
 export const setSketchSettings = (
-  canvas: fabric.Canvas | undefined
+  canvas: FabricType.Canvas | undefined
 ): void => {
   if (canvas) {
     // Initial canvas setup
@@ -13,6 +16,8 @@ export const setSketchSettings = (
     canvas.selectionColor = FABRIC_SETTINGS.SELECTION_COLOR;
     canvas.selectionBorderColor = FABRIC_SETTINGS.SELECTION_BORDER_COLOR;
     canvas.selectionLineWidth = FABRIC_SETTINGS.SELECTION_LINE_WIDTH;
+    canvas.selection = false;
+    addCustomBrushes(fabric);
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Backspace") {
@@ -22,7 +27,7 @@ export const setSketchSettings = (
   }
 };
 
-const removeSelectedObject = (canvas: fabric.Canvas) => {
+const removeSelectedObject = (canvas: FabricType.Canvas) => {
   const selectedObject = canvas.getActiveObject();
 
   if (selectedObject && selectedObject.type === "activeSelection") {
@@ -37,7 +42,7 @@ const removeSelectedObject = (canvas: fabric.Canvas) => {
 };
 
 export const changeActiveObjectColor = (
-  canvas: fabric.Canvas,
+  canvas: FabricType.Canvas,
   color: ColorResult
 ) => {
   const activeObject = canvas.getActiveObject();

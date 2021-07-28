@@ -11,7 +11,8 @@
   align-items: center;
   justify-content: center;
 
-  &:hover {
+  &:hover,
+  &.active {
     background: #e8f8ff;
   }
 }

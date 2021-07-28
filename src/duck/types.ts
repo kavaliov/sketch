@@ -1,5 +1,5 @@
 import React from "react";
-import { fabric } from "fabric";
+import { fabric as FabricType } from "fabric";
 
 export type AnyDispatch = React.Dispatch<any>;
 
@@ -8,7 +8,7 @@ export type Mode = "drawing" | "hand";
 export type BrushType = "eraser" | "marker" | "magic" | "pencil" | "pen" | "";
 
 export interface AppContext {
-  canvas: fabric.Canvas;
+  canvas: FabricType.Canvas;
   state: State;
   dispatch: AnyDispatch;
 }

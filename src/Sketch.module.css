@@ -1,6 +1,7 @@
 .wrapper {
-  width: 970px;
-  height: 518px;
+  width: 100%;
+  max-width: 970px;
+  max-height: 518px;
   margin: 100px auto;
   border: 1px solid #c4d0e4;
   border-radius: 4px;
