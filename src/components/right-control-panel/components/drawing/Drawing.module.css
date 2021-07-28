@@ -8,6 +8,20 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font-family: sans-serif;
+
+    .exampleWrapper {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .example {
+      border-radius: 50%;
+    }
   }
 
   .brushes {
@@ -50,6 +64,18 @@
       transform: translateX(-3px);
       box-sizing: border-box;
       cursor: grab;
+
+      .value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        background: white;
+        transform: translate(-35px, -4px);
+        border: 1px solid #f1f1f1;
+        border-radius: 3px;
+        font-size: 14px;
+      }
     }
   }
 }

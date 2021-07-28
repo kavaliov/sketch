@@ -18,3 +18,8 @@ export interface State {
   mode: Mode;
   brushType: BrushType;
 }
+
+export interface Range {
+  min: number;
+  max: number;
+}

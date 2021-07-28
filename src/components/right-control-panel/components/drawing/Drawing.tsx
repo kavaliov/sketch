@@ -44,12 +44,25 @@ const Drawing: React.FC = () => {
       <Panel opened={opened} onClose={() => setOpened(false)}>
         <div className={styles.panel}>
           <div className={styles.brushSize}>
-            {brushSize}
+            <div className={styles.exampleWrapper}>
+              <div
+                className={styles.example}
+                style={{
+                  width: brushSize,
+                  height: brushSize,
+                  backgroundColor: currentColor,
+                }}
+              />
+            </div>
             <ReactSlider
               className={styles.slider}
-              thumbClassName={styles.thumb}
               orientation="vertical"
               defaultValue={brushSize}
+              renderThumb={(props, state) => (
+                <div {...props} className={styles.thumb}>
+                  <div className={styles.value}>{state.valueNow}</div>
+                </div>
+              )}
               invert
               min={1}
               max={60}
