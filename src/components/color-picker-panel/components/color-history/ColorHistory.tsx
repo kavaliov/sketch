@@ -25,8 +25,8 @@ const ColorHistory: React.FC = () => {
       />
       <button
         className={styles.color}
-        style={{ backgroundColor: history[1] }}
-        onClick={() => setColorHandler(history[1])}
+        style={{ backgroundColor: history[1] || "white" }}
+        onClick={() => setColorHandler(history[1] || "white")}
       />
     </div>
   );

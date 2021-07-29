@@ -1,6 +1,5 @@
 import { fabric as FabricType } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
-import { ColorResult } from "react-color";
 import addCustomBrushes from "./addCustomBrushes";
 
 const { fabric } = window;
@@ -42,7 +41,7 @@ const removeSelectedObject = (canvas: FabricType.Canvas) => {
 
 export const changeActiveObjectColor = (
   canvas: FabricType.Canvas,
-  color: ColorResult
+  color: string
 ) => {
   const activeObject = canvas.getActiveObject();
 
@@ -59,16 +58,16 @@ export const changeActiveObjectColor = (
   }
 };
 
-const changeObjectColor = (object: any, color: ColorResult) => {
+const changeObjectColor = (object: any, color: string) => {
   if (object.type === "path" && !object.shadow) {
-    object.set({ stroke: color.hex });
+    object.set({ stroke: color });
   }
 
   if (object.type === "rect" || object.type === "circle" || object.fromSVG) {
-    object.set({ fill: color.hex });
+    object.set({ fill: color });
   }
 
   if(object.type === "path" && object.shadow) {
-      object.shadow.color = color.hex;
+      object.shadow.color = color;
   }
 };

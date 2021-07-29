@@ -10,9 +10,12 @@ const ColorPickerPanel: React.FC = () => {
   const { canvas, dispatch, state } = React.useContext(AppContext);
   const { currentColor } = state;
 
+  React.useEffect(() => {
+    changeActiveObjectColor(canvas, currentColor);
+  }, [currentColor, canvas]);
+
   const changeHandler = (color: ColorResult) => {
     dispatch(setCurrentColor({ currentColor: color.hex }));
-    changeActiveObjectColor(canvas, color);
   };
 
   return (
