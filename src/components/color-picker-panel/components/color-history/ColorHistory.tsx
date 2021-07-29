@@ -10,7 +10,7 @@ const ColorHistory: React.FC = () => {
 
   React.useEffect(() => {
     setHistory([currentColor, history[0]]);
-  }, [currentColor]);
+  }, [currentColor, history]);
 
   const setColorHandler = (color: string) => {
     dispatch(setCurrentColor({ currentColor: color }));
