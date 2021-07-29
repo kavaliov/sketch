@@ -1,3 +1,4 @@
+import { fabric as FabricType } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
 
 export const getId = (length = 10): string => {
@@ -33,4 +34,27 @@ export const randomPosition = () => {
     top: randomInt(center.y - 180, center.y + 120),
     left: randomInt(center.x - 400, center.x + 150),
   };
+};
+
+export const rgbToHex = (r: number, g: number, b: number): string =>
+  `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+
+export const lockAllObjects = (canvas: FabricType.Canvas): void => {
+  canvas.selection = false;
+  canvas
+    .getObjects()
+    .forEach((object: FabricType.Object) => {
+      object.set("selectable", false);
+      object.hoverCursor = "default";
+    });
+};
+
+export const unLockAllObjects = (canvas: FabricType.Canvas): void => {
+  canvas.selection = true;
+  canvas
+    .getObjects()
+    .forEach((object: FabricType.Object) => {
+      object.set("selectable", true);
+      object.hoverCursor = "move";
+    });
 };

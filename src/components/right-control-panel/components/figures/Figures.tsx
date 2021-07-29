@@ -1,17 +1,19 @@
 import React from "react";
 import { Button, Panel } from "components";
 import { AppContext } from "duck/context";
+import { setMode } from "duck/actions";
 import pic from "./assets/picture.svg";
 import { SHAPES } from "./shapes";
-import { drawShape } from "./duck/operations";
+import { drawImg } from "./duck/operations";
 import styles from "./Figures.module.css";
 
 const Figures: React.FC = () => {
   const [opened, setOpened] = React.useState(false);
-  const { canvas } = React.useContext(AppContext);
+  const { canvas, dispatch } = React.useContext(AppContext);
 
   const shapeClickHandler = (src: string) => {
-    drawShape(canvas, src);
+    dispatch(setMode({ mode: "hand" }));
+    drawImg(canvas, src);
   };
 
   return (
