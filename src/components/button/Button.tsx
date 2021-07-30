@@ -6,12 +6,14 @@ interface ButtonType {
   onClick?: () => any;
   className?: string;
   active?: boolean;
+  style?: any;
 }
 
 const Button: React.FC<ButtonType> = ({
   children,
   onClick,
   className,
+  style,
   active = false,
 }) => (
   <button
@@ -19,6 +21,7 @@ const Button: React.FC<ButtonType> = ({
     className={classNames(styles.wrapper, className, {
       [styles.active]: active,
     })}
+    style={style}
   >
     {children}
   </button>

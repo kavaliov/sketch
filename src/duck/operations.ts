@@ -25,7 +25,7 @@ export const setSketchSettings = (
   }
 };
 
-const removeSelectedObject = (canvas: FabricType.Canvas) => {
+export const removeSelectedObject = (canvas: FabricType.Canvas) => {
   const selectedObject = canvas.getActiveObject();
 
   if (selectedObject && selectedObject.type === "activeSelection") {

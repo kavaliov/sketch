@@ -2,7 +2,7 @@
   "name": "sketch",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kavaliov.github.io/sketch/",
+  "_homepage": "https://kavaliov.github.io/sketch/",
   "scripts": {
     "start": "craco start",
     "build": "craco build",

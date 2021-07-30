@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorPickerPanel, RightControlPanel } from "./components";
+import {ColorPickerPanel, ObjectMenu, RightControlPanel} from "./components";
 import { getId } from "duck/utils";
 import { AppContext } from "duck/context";
 import appReducer from "duck/reducer";
@@ -36,6 +36,7 @@ const Sketch: React.FC = () => {
         >
           <ColorPickerPanel />
           <RightControlPanel />
+          <ObjectMenu />
         </AppContext.Provider>
       )}
     </div>
