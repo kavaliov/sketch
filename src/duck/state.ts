@@ -1,7 +1,8 @@
 import { State } from "./types";
+import { FABRIC_SETTINGS } from "./constants";
 
 const appState: State = {
-  currentColor: "#ff0000",
+  currentColor: FABRIC_SETTINGS.START_COLOR,
   mode: "hand",
   brushType: "pencil",
 };

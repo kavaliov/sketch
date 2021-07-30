@@ -20,10 +20,7 @@
       box-sizing: border-box;
       transform: translate(-9px, -5px);
       border-radius: 50%;
-
-      &:hover {
-        cursor: grab;
-      }
+      cursor: grab;
     }
   }
 }
