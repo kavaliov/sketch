@@ -67,7 +67,15 @@ const changeObjectColor = (object: any, color: string) => {
     object.set({ fill: color });
   }
 
-  if(object.type === "path" && object.shadow) {
-      object.shadow.color = color;
+  if (object.type === "path" && object.shadow) {
+    object.shadow.color = color;
+  }
+
+  if (object.type === "image") {
+    object.filters[0] = new fabric.Image.filters.BlendColor({
+      color,
+      mode: "tint",
+    });
+    object.applyFilters();
   }
 };
