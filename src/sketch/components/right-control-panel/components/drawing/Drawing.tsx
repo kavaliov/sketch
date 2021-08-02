@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 import ReactSlider from "react-slider";
-import "react-slider";
 import { Panel, Button } from "components";
 import { AppContext } from "duck/context";
 import { setMode } from "duck/actions";

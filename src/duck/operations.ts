@@ -21,7 +21,7 @@ export const setSketchSettings = (
       if (event.key === "Backspace") {
         const selectedObject = canvas.getActiveObject();
         // @ts-ignore
-        if (!selectedObject.isEditing) {
+        if (selectedObject && !selectedObject.isEditing) {
           removeSelectedObject(canvas, selectedObject);
         }
       }
