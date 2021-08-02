@@ -1,11 +1,20 @@
 import React from "react";
 import { AppContext } from "duck/context";
 import { getPosition } from "./duck/utils";
-import { CurrentColor, RemoveObject, Copy } from "./components";
+import { removeEmptyTextbox } from "./duck/operations";
+import {
+  CurrentColor,
+  RemoveObject,
+  Copy,
+  BoldText,
+  ItalicText,
+  UnderlineText,
+} from "./components";
 import styles from "./ObjectMenu.module.css";
 
 const ObjectMenu: React.FC = () => {
   const [selected, setSelected] = React.useState(false);
+  const [type, setType] = React.useState("");
   const [position, setPosition] = React.useState({ top: 0, left: 0 });
   const { canvas } = React.useContext(AppContext);
 
@@ -16,6 +25,7 @@ const ObjectMenu: React.FC = () => {
 
     const selectHandler = (e: any) => {
       if (e.target) {
+        setType(e.target.type);
         setSelected(true);
         setPosition(getPosition(e.target));
         e.target.on("moving", movingHandler);
@@ -25,10 +35,13 @@ const ObjectMenu: React.FC = () => {
 
     canvas.on("selection:created", selectHandler);
     canvas.on("selection:updated", selectHandler);
-
     canvas.on("selection:cleared", (e: any) => {
       setSelected(false);
       if (e.deselected) {
+        if (e.deselected[0].type === "textbox") {
+          canvas.defaultCursor = "default";
+          removeEmptyTextbox(canvas, e.deselected[0]);
+        }
         e.deselected[0].off("moving", movingHandler);
         e.deselected[0].off("scaling", movingHandler);
       }
@@ -42,6 +55,13 @@ const ObjectMenu: React.FC = () => {
           <CurrentColor />
           <RemoveObject />
           <Copy />
+          {type === "textbox" && (
+            <>
+              <BoldText />
+              <ItalicText />
+              <UnderlineText />
+            </>
+          )}
         </div>
       )}
     </>

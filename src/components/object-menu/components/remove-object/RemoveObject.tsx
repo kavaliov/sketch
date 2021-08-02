@@ -6,8 +6,10 @@ import { AppContext } from "duck/context";
 
 const RemoveObject: React.FC = () => {
   const { canvas } = React.useContext(AppContext);
+
   const removeHandler = () => {
-    removeSelectedObject(canvas);
+    const activeObject = canvas.getActiveObject();
+    removeSelectedObject(canvas, activeObject);
   };
 
   return (

@@ -19,15 +19,20 @@ export const setSketchSettings = (
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Backspace") {
-        removeSelectedObject(canvas);
+        const selectedObject = canvas.getActiveObject();
+        // @ts-ignore
+        if (!selectedObject.isEditing) {
+          removeSelectedObject(canvas, selectedObject);
+        }
       }
     });
   }
 };
 
-export const removeSelectedObject = (canvas: FabricType.Canvas) => {
-  const selectedObject = canvas.getActiveObject();
-
+export const removeSelectedObject = (
+  canvas: FabricType.Canvas,
+  selectedObject: any
+) => {
   if (selectedObject && selectedObject.type === "activeSelection") {
     (selectedObject as any).forEachObject((element: any) => {
       canvas.remove(element);
@@ -63,7 +68,12 @@ const changeObjectColor = (object: any, color: string) => {
     object.set({ stroke: color });
   }
 
-  if (object.type === "rect" || object.type === "circle" || object.fromSVG) {
+  if (
+    object.type === "rect" ||
+    object.type === "circle" ||
+    object.type === "textbox" ||
+    object.fromSVG
+  ) {
     object.set({ fill: color });
   }
 
