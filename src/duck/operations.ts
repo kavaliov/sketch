@@ -71,7 +71,7 @@ const changeObjectColor = (object: any, color: string) => {
   if (
     object.type === "rect" ||
     object.type === "circle" ||
-    object.type === "textbox" ||
+    object.type === "i-text" ||
     object.fromSVG
   ) {
     object.set({ fill: color });
