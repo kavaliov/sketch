@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Sketch from "./Sketch";
+import Sketch from "./sketch";
 
 ReactDOM.render(
   <React.StrictMode>
