@@ -8,7 +8,7 @@ import {
   Copy,
   BoldText,
   ItalicText,
-  UnderlineText,
+  UnderlineText, AlignText,
 } from "./components";
 import styles from "./ObjectMenu.module.css";
 
@@ -24,12 +24,21 @@ const ObjectMenu: React.FC = () => {
     };
 
     const selectHandler = (e: any) => {
-      if (e.target) {
-        setType(e.target.type);
+      const targetObject = e.target;
+
+      if (targetObject) {
+        setType(targetObject.type);
         setSelected(true);
-        setPosition(getPosition(e.target));
-        e.target.on("moving", movingHandler);
-        e.target.on("scaling", movingHandler);
+        setPosition(getPosition(targetObject));
+        targetObject.on("moving", movingHandler);
+        targetObject.on("scaling", movingHandler);
+
+        // resize fix for i-text
+        if (targetObject.type === "i-text") {
+          targetObject.on("changed", () => {
+            setPosition(getPosition(targetObject));
+          });
+        }
       }
     };
 
@@ -38,12 +47,14 @@ const ObjectMenu: React.FC = () => {
     canvas.on("selection:cleared", (e: any) => {
       setSelected(false);
       if (e.deselected) {
-        if (e.deselected[0].type === "textbox") {
-          canvas.defaultCursor = "default";
-          removeEmptyTextbox(canvas, e.deselected[0]);
-        }
         e.deselected[0].off("moving", movingHandler);
         e.deselected[0].off("scaling", movingHandler);
+
+        if (e.deselected[0].type === "i-text") {
+          canvas.defaultCursor = "default";
+          e.deselected[0].off("changed");
+          removeEmptyTextbox(canvas, e.deselected[0]);
+        }
       }
     });
   }, [canvas]);
@@ -55,11 +66,12 @@ const ObjectMenu: React.FC = () => {
           <CurrentColor />
           <RemoveObject />
           <Copy />
-          {type === "textbox" && (
+          {type === "i-text" && (
             <>
               <BoldText />
               <ItalicText />
               <UnderlineText />
+              <AlignText />
             </>
           )}
         </div>

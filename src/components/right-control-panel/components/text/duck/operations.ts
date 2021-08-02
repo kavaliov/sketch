@@ -5,12 +5,10 @@ const { fabric } = window;
 
 export const appendText = (canvas: FabricType.Canvas, color: string): void => {
   const position = randomPosition();
-  const textBox = new fabric.Textbox("", {
+  const textBox = new fabric.IText("", {
     ...position,
     fontSize: 28,
-    lineHeight: 0.8,
-    width: 150,
-    height: 40,
+    lineHeight: 0.95,
     fill: color,
     fontFamily: "Tahoma",
     cursorColor: "black",
