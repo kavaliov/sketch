@@ -31,8 +31,8 @@ export const randomPosition = () => {
   };
 
   return {
-    top: randomInt(center.y - 240, center.y + 80),
-    left: randomInt(center.x - 470, center.x + 70),
+    top: randomInt(center.y - 180, center.y + 70),
+    left: randomInt(center.x - 350, center.x + 50),
   };
 };
 
