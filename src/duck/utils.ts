@@ -41,20 +41,16 @@ export const rgbToHex = (r: number, g: number, b: number): string =>
 
 export const lockAllObjects = (canvas: FabricType.Canvas): void => {
   canvas.selection = false;
-  canvas
-    .getObjects()
-    .forEach((object: FabricType.Object) => {
-      object.set("selectable", false);
-      object.hoverCursor = "default";
-    });
+  canvas.getObjects().forEach((object: FabricType.Object) => {
+    object.set("selectable", false);
+    object.hoverCursor = "default";
+  });
 };
 
 export const unLockAllObjects = (canvas: FabricType.Canvas): void => {
   canvas.selection = true;
-  canvas
-    .getObjects()
-    .forEach((object: FabricType.Object) => {
-      object.set("selectable", true);
-      object.hoverCursor = "move";
-    });
+  canvas.getObjects().forEach((object: FabricType.Object) => {
+    object.set("selectable", true);
+    object.hoverCursor = "move";
+  });
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../index";
+import { Button } from "components";
 import classNames from "classnames";
 import closeIcon from "./assets/close.svg";
 import styles from "./Panel.module.css";

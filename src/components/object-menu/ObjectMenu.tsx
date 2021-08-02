@@ -8,7 +8,8 @@ import {
   Copy,
   BoldText,
   ItalicText,
-  UnderlineText, AlignText,
+  UnderlineText,
+  AlignText,
 } from "./components";
 import styles from "./ObjectMenu.module.css";
 

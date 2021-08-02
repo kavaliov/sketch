@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   padding: 8px;
   transform: translateX(-50%);
   gap: 8px;

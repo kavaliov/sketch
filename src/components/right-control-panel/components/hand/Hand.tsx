@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../../index";
+import { Button } from "components";
 import { AppContext } from "duck/context";
 import { setMode } from "duck/actions";
 import icon from "./assets/hand.svg";
