@@ -16,6 +16,10 @@ export const setSketchSettings = (
     canvas.selectionColor = FABRIC_SETTINGS.SELECTION_COLOR;
     canvas.selectionBorderColor = FABRIC_SETTINGS.SELECTION_BORDER_COLOR;
     canvas.selectionLineWidth = FABRIC_SETTINGS.SELECTION_LINE_WIDTH;
+    // @ts-ignore
+    canvas.setBackgroundColor("white", canvas.renderAll.bind(canvas), {
+      erasable: false,
+    });
     addPencilBrush(fabric);
 
     document.addEventListener("keydown", (event) => {

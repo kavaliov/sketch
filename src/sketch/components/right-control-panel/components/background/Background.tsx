@@ -16,6 +16,8 @@ const Background: React.FC = () => {
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
         scaleX: canvas.getWidth() / img.width,
         scaleY: canvas.getHeight() / img.height,
+        // @ts-ignore
+        erasable: false,
       });
     });
   };
@@ -25,7 +27,10 @@ const Background: React.FC = () => {
       new fabric.Image(""),
       canvas.renderAll.bind(canvas)
     );
-    canvas.setBackgroundColor(color, canvas.renderAll.bind(canvas));
+    // @ts-ignore
+    canvas.setBackgroundColor(color, canvas.renderAll.bind(canvas), {
+      erasable: false,
+    });
   };
 
   return (
