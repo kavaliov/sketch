@@ -5,6 +5,7 @@
   padding: 8px;
   transform: translateX(-50%);
   gap: 8px;
+  justify-items: center;
 
   &.img {
     grid-template-columns: repeat(2, 1fr);

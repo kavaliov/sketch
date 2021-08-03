@@ -11,6 +11,7 @@ import {
   ItalicText,
   UnderlineText,
   AlignText,
+  FontText,
 } from "./components";
 import styles from "./ObjectMenu.module.css";
 
@@ -83,6 +84,7 @@ const ObjectMenu: React.FC = () => {
               <ItalicText />
               <UnderlineText />
               <AlignText />
+              <FontText />
             </>
           )}
         </div>
