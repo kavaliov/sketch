@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import { AppContext } from "duck/context";
 import { getPosition } from "./duck/utils";
 import { removeEmptyTextbox } from "./duck/operations";
@@ -15,6 +16,7 @@ import styles from "./ObjectMenu.module.css";
 
 const ObjectMenu: React.FC = () => {
   const [selected, setSelected] = React.useState(false);
+  const [fromImgShape, setFromImgShape] = React.useState(false);
   const [type, setType] = React.useState("");
   const [position, setPosition] = React.useState({ top: 0, left: 0 });
   const { canvas } = React.useContext(AppContext);
@@ -34,6 +36,10 @@ const ObjectMenu: React.FC = () => {
         targetObject.on("moving", movingHandler);
         targetObject.on("scaling", movingHandler);
 
+        if (targetObject.fromImgShape) {
+          setFromImgShape(true);
+        }
+
         // resize fix for i-text
         if (targetObject.type === "i-text") {
           targetObject.on("changed", () => {
@@ -47,6 +53,7 @@ const ObjectMenu: React.FC = () => {
     canvas.on("selection:updated", selectHandler);
     canvas.on("selection:cleared", (e: any) => {
       setSelected(false);
+      setFromImgShape(false);
       if (e.deselected) {
         e.deselected[0].off("moving", movingHandler);
         e.deselected[0].off("scaling", movingHandler);
@@ -63,8 +70,11 @@ const ObjectMenu: React.FC = () => {
   return (
     <>
       {selected && (
-        <div style={{ ...position }} className={styles.wrapper}>
-          <CurrentColor />
+        <div
+          style={{ ...position }}
+          className={classNames(styles.wrapper, { [styles.img]: fromImgShape })}
+        >
+          {!fromImgShape && <CurrentColor />}
           <RemoveObject />
           <Copy />
           {type === "i-text" && (

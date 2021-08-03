@@ -14,7 +14,7 @@ const Panel: React.FC<PanelType> = ({ opened, onClose, title, children }) => {
   return (
     <div className={classNames(styles.wrapper, { [styles.opened]: opened })}>
       <div className={styles.header}>
-        {title}
+        <div className={styles.title}>{title}</div>
         <Button onClick={onClose} className={styles.close}>
           <img src={closeIcon} alt="" />
         </Button>

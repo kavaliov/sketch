@@ -26,3 +26,26 @@ export const TOOLS = [
     icon: pen,
   },
 ];
+
+export const BRUSH_SIZE = {
+  eraser: {
+    min: 1,
+    max: 90
+  },
+  marker: {
+    min: 1,
+    max: 90
+  },
+  magic: {
+    min: 10,
+    max: 60
+  },
+  pencil: {
+    min: 1,
+    max: 60
+  },
+  pen: {
+    min: 5,
+    max: 20
+  },
+}

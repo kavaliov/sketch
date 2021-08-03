@@ -3,7 +3,7 @@
 
 // https://github.com/av01d/fabric-brushes/blob/main/dist/fabric.brushes.min.js
 
-const addCustomBrushes = (f: any) => {
+export const addPencilBrush = (f: any) => {
   f.util.trimCanvas = function (a) {
     for (
       var b = a.getContext("2d"),
@@ -140,5 +140,3 @@ const addCustomBrushes = (f: any) => {
     _render: function () {},
   });
 };
-
-export default addCustomBrushes;

@@ -1,6 +1,6 @@
 import { fabric as FabricType } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
-import addCustomBrushes from "./addCustomBrushes";
+import { addPencilBrush } from "./customBrushes";
 
 const { fabric } = window;
 
@@ -15,7 +15,7 @@ export const setSketchSettings = (
     canvas.selectionColor = FABRIC_SETTINGS.SELECTION_COLOR;
     canvas.selectionBorderColor = FABRIC_SETTINGS.SELECTION_BORDER_COLOR;
     canvas.selectionLineWidth = FABRIC_SETTINGS.SELECTION_LINE_WIDTH;
-    addCustomBrushes(fabric);
+    addPencilBrush(fabric);
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Backspace") {

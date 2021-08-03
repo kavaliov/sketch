@@ -17,6 +17,14 @@
     display: flex;
     padding: 8px;
 
+    .title {
+      font-family: sans-serif;
+      align-items: center;
+      display: flex;
+      padding: 0 5px;
+      color: #556181;
+    }
+
     .close {
       margin-left: auto;
       box-shadow: none;

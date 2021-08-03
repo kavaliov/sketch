@@ -5,7 +5,7 @@ import { Panel, Button } from "components";
 import { AppContext } from "duck/context";
 import { setMode } from "duck/actions";
 import { BrushType } from "duck/types";
-import { TOOLS } from "./duck/constants";
+import { TOOLS, BRUSH_SIZE } from "./duck/constants";
 import highlight from "./assets/highlight.svg";
 import { changeCanvasBrush } from "./duck/operations";
 import styles from "./Drawing.module.css";
@@ -26,12 +26,18 @@ const Drawing: React.FC = () => {
 
   React.useEffect(() => {
     changeCanvasBrush(canvas, brush, brushSize, currentColor);
+    if (brush && brushSize < BRUSH_SIZE[brush].min) {
+      setBrushSize(BRUSH_SIZE[brush].min);
+    }
+
+    if (brush && brushSize > BRUSH_SIZE[brush].max) {
+      setBrushSize(BRUSH_SIZE[brush].max);
+    }
   }, [brush, canvas, brushSize, currentColor]);
 
   const brushHandler = (brushType: BrushType): void => {
     dispatch(setMode({ mode: "drawing" }));
     setBrush(brushType);
-    setOpened(false);
   };
 
   const sizeHandler = (size: number): void => {
@@ -43,7 +49,7 @@ const Drawing: React.FC = () => {
       <Button active={mode === "drawing"} onClick={() => setOpened(true)}>
         <img src={highlight} alt="" />
       </Button>
-      <Panel opened={opened} onClose={() => setOpened(false)}>
+      <Panel title="Brushes" opened={opened} onClose={() => setOpened(false)}>
         <div className={styles.panel}>
           <div className={styles.brushSize}>
             <div className={styles.exampleWrapper}>
@@ -59,15 +65,15 @@ const Drawing: React.FC = () => {
             <ReactSlider
               className={styles.slider}
               orientation="vertical"
-              defaultValue={brushSize}
+              value={brushSize}
               renderThumb={(props, state) => (
                 <div {...props} className={styles.thumb}>
                   <div className={styles.value}>{state.valueNow}</div>
                 </div>
               )}
               invert
-              min={1}
-              max={60}
+              min={brush ? BRUSH_SIZE[brush].min : 1}
+              max={brush ? BRUSH_SIZE[brush].max : 60}
               onChange={sizeHandler}
             />
           </div>
