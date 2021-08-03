@@ -1,6 +1,7 @@
 import { fabric as FabricType } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
 import { addPencilBrush } from "./customBrushes";
+import { addOpacity } from "./utils";
 
 const { fabric } = window;
 
@@ -64,8 +65,16 @@ export const changeActiveObjectColor = (
 };
 
 const changeObjectColor = (object: any, color: string) => {
-  if (object.type === "path" && !object.shadow) {
+  if (
+    object.type === "path" &&
+    !object.shadow &&
+    object.brushType !== "marker"
+  ) {
     object.set({ stroke: color });
+  }
+
+  if (object.type === "path" && object.brushType === "marker") {
+    object.set({ stroke: addOpacity(color, 20) });
   }
 
   if (
@@ -86,6 +95,7 @@ const changeObjectColor = (object: any, color: string) => {
       color,
       mode: "tint",
     });
+
     object.applyFilters();
   }
 };

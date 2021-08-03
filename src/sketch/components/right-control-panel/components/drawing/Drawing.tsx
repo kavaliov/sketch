@@ -18,11 +18,21 @@ const Drawing: React.FC = () => {
   const { currentColor, mode } = state;
 
   React.useEffect(() => {
+    const pathCreateHandler = (e: any) => {
+      e.path.brushType = brush;
+    };
+
+    canvas.on("path:created", pathCreateHandler);
+
     canvas.isDrawingMode = mode === "drawing";
     if (mode !== "drawing") {
       setBrush("");
     }
-  }, [mode, canvas]);
+
+    return () => {
+      canvas.off("path:created", pathCreateHandler);
+    };
+  }, [mode, canvas, brush]);
 
   React.useEffect(() => {
     changeCanvasBrush(canvas, brush, brushSize, currentColor);
