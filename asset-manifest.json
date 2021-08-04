@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sketch/static/css/main.cfec3ce9.chunk.css",
-    "main.js": "/sketch/static/js/main.4a253cfb.chunk.js",
-    "main.js.map": "/sketch/static/js/main.4a253cfb.chunk.js.map",
+    "main.css": "/sketch/static/css/main.c2e1b10a.chunk.css",
+    "main.js": "/sketch/static/js/main.d4544acc.chunk.js",
+    "main.js.map": "/sketch/static/js/main.d4544acc.chunk.js.map",
     "runtime-main.js": "/sketch/static/js/runtime-main.8ad7e194.js",
     "runtime-main.js.map": "/sketch/static/js/runtime-main.8ad7e194.js.map",
-    "static/js/2.35391731.chunk.js": "/sketch/static/js/2.35391731.chunk.js",
-    "static/js/2.35391731.chunk.js.map": "/sketch/static/js/2.35391731.chunk.js.map",
+    "static/js/2.d7aa3cb1.chunk.js": "/sketch/static/js/2.d7aa3cb1.chunk.js",
+    "static/js/2.d7aa3cb1.chunk.js.map": "/sketch/static/js/2.d7aa3cb1.chunk.js.map",
     "index.html": "/sketch/index.html",
-    "static/css/main.cfec3ce9.chunk.css.map": "/sketch/static/css/main.cfec3ce9.chunk.css.map",
-    "static/js/2.35391731.chunk.js.LICENSE.txt": "/sketch/static/js/2.35391731.chunk.js.LICENSE.txt",
+    "static/css/main.c2e1b10a.chunk.css.map": "/sketch/static/css/main.c2e1b10a.chunk.css.map",
+    "static/js/2.d7aa3cb1.chunk.js.LICENSE.txt": "/sketch/static/js/2.d7aa3cb1.chunk.js.LICENSE.txt",
     "static/media/align-center.32449acd.svg": "/sketch/static/media/align-center.32449acd.svg",
     "static/media/align-left.277ba860.svg": "/sketch/static/media/align-left.277ba860.svg",
     "static/media/align-right.f9735e6a.svg": "/sketch/static/media/align-right.f9735e6a.svg",
@@ -44,6 +44,7 @@
     "static/media/picture.b59a650c.svg": "/sketch/static/media/picture.b59a650c.svg",
     "static/media/rectangle-outlined.f492c7dd.svg": "/sketch/static/media/rectangle-outlined.f492c7dd.svg",
     "static/media/rectangle.06a5077b.svg": "/sketch/static/media/rectangle.06a5077b.svg",
+    "static/media/redo.cfafd4e4.svg": "/sketch/static/media/redo.cfafd4e4.svg",
     "static/media/Drawing.module.css": "/sketch/static/media/sliderBg.ca9dacfe.svg",
     "static/media/star-outlined.0daaff4a.svg": "/sketch/static/media/star-outlined.0daaff4a.svg",
     "static/media/star.10d3d0dd.svg": "/sketch/static/media/star.10d3d0dd.svg",
@@ -55,12 +56,13 @@
     "static/media/triangle-outlined.a25dd2aa.svg": "/sketch/static/media/triangle-outlined.a25dd2aa.svg",
     "static/media/triangle.fbe306e2.svg": "/sketch/static/media/triangle.fbe306e2.svg",
     "static/media/underline.c56bb0d2.svg": "/sketch/static/media/underline.c56bb0d2.svg",
+    "static/media/undo.c0720610.svg": "/sketch/static/media/undo.c0720610.svg",
     "static/media/watermelon.339708ac.svg": "/sketch/static/media/watermelon.339708ac.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8ad7e194.js",
-    "static/js/2.35391731.chunk.js",
-    "static/css/main.cfec3ce9.chunk.css",
-    "static/js/main.4a253cfb.chunk.js"
+    "static/js/2.d7aa3cb1.chunk.js",
+    "static/css/main.c2e1b10a.chunk.css",
+    "static/js/main.d4544acc.chunk.js"
   ]
 }
