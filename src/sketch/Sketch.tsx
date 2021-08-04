@@ -1,11 +1,17 @@
 import React from "react";
+import "fabric-history";
 import { getId } from "duck/utils";
 import { AppContext } from "duck/context";
 import appReducer from "duck/reducer";
 import appState from "duck/state";
 import { CANVAS_SETTINGS } from "duck/constants";
 import { setSketchSettings } from "duck/operations";
-import { ColorPickerPanel, ObjectMenu, RightControlPanel } from "./components";
+import {
+  ColorPickerPanel,
+  ObjectMenu,
+  RightControlPanel,
+  LeftControlPanel,
+} from "./components";
 import styles from "./Sketch.module.css";
 
 const { fabric } = window;
@@ -34,6 +40,7 @@ const Sketch: React.FC = () => {
         <AppContext.Provider
           value={{ canvas: sketchRef.current, dispatch, state }}
         >
+          <LeftControlPanel />
           <ColorPickerPanel />
           <RightControlPanel />
           <ObjectMenu />

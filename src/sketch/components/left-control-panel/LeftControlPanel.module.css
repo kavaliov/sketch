@@ -1,0 +1,17 @@
+.wrapper {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  padding-left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  button {
+    margin-bottom: 8px;
+  }
+}
