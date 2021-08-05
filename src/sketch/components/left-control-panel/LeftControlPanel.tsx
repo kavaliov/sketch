@@ -1,10 +1,11 @@
 import React from "react";
-import { UndoRedo } from "./components";
+import { Fullscreen, UndoRedo } from "./components";
 import styles from "./LeftControlPanel.module.css";
 
 const LeftControlPanel: React.FC = () => {
   return (
     <div className={styles.wrapper}>
+      <Fullscreen />
       <UndoRedo />
     </div>
   );

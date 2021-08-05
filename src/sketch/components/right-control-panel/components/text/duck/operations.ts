@@ -5,7 +5,7 @@ const { fabric } = window;
 
 export const appendText = (canvas: FabricType.Canvas, color: string): void => {
   const position = randomPosition();
-  const textBox = new fabric.IText("", {
+  const itext = new fabric.IText("", {
     ...position,
     fontSize: 28,
     lineHeight: 0.95,
@@ -15,8 +15,8 @@ export const appendText = (canvas: FabricType.Canvas, color: string): void => {
     textAlign: "center",
   });
 
-  textBox.enterEditing();
-  canvas.add(textBox);
-  canvas.setActiveObject(textBox);
+  canvas.add(itext);
+  canvas.setActiveObject(itext);
+  itext.enterEditing();
   canvas.renderAll();
 };

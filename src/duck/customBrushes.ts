@@ -39,16 +39,17 @@ export const addPencilBrush = (f: any) => {
     return this;
   };
   f.BaseBrush.prototype.convertToImg = function () {
+    var zoom = this.canvas.getZoom();
     var a = this.canvas.getRetinaScaling(),
       b = f.util.copyCanvasElement(this.canvas.upperCanvasEl),
       c = f.util.trimCanvas(b);
     b = new f.Image(b);
     this.canvas.add(b);
     b.set({
-      left: c.x / a,
-      top: c.y / a,
-      scaleX: 1 / a,
-      scaleY: 1 / a,
+      left: c.x / a / zoom,
+      top: c.y / a / zoom,
+      scaleX: 1 / a / zoom,
+      scaleY: 1 / a / zoom,
     }).setCoords();
     this.canvas.clearContext(this.canvas.contextTop);
   };
@@ -109,6 +110,7 @@ export const addPencilBrush = (f: any) => {
         .distanceFrom({ x: 0, y: 0 });
     },
     draw: function (a) {
+      var zoom = this.canvas.getZoom();
       var b;
       var c = this._point.subtract(this._latest);
       var e = Math.ceil(this._size / 2);
@@ -131,7 +133,7 @@ export const addPencilBrush = (f: any) => {
           var r = f.util.getRandom(h, h / 2);
           var t = k.x + n * Math.sin(p) - q / 2;
           k = k.y + n * Math.cos(p) - r / 2;
-          a.rect(t, k, q, r);
+          a.rect(t * zoom, k * zoom, q, r);
         }
       a.fill();
       a.restore();

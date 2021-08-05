@@ -17,6 +17,7 @@ export interface State {
   currentColor: string;
   mode: Mode;
   brushType: BrushType;
+  fullscreen: boolean;
 }
 
 export interface Range {

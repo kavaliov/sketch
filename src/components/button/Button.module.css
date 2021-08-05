@@ -15,4 +15,14 @@
   &.active {
     background: #e8f8ff;
   }
+
+  &.disabled {
+    background: #edf1f7;
+    color: #c4d0e4;
+    cursor: not-allowed;
+
+    img {
+      opacity: 0.5;
+    }
+  }
 }

@@ -12,3 +12,7 @@ export const setMode = createAction("SKETCH/SET_MODE")<{
 export const setBrush = createAction("SKETCH/SET_BRUSH")<{
   brushType: BrushType;
 }>();
+
+export const setFullscreen = createAction("SKETCH/SET_FULLSCREEN")<{
+  fullscreen: boolean;
+}>();

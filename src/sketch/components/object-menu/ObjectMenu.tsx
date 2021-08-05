@@ -20,11 +20,20 @@ const ObjectMenu: React.FC = () => {
   const [fromImgShape, setFromImgShape] = React.useState(false);
   const [type, setType] = React.useState("");
   const [position, setPosition] = React.useState({ top: 0, left: 0 });
-  const { canvas } = React.useContext(AppContext);
+  const { canvas, state } = React.useContext(AppContext);
+  const { fullscreen } = state;
+
+  React.useEffect(() => {
+    const activeObject = canvas.getActiveObject();
+
+    if (activeObject) {
+      setPosition(getPosition(canvas.getActiveObject(), canvas.getZoom()));
+    }
+  }, [fullscreen, canvas]);
 
   React.useEffect(() => {
     const movingHandler = (e: any) => {
-      setPosition(getPosition(e.transform.target));
+      setPosition(getPosition(e.transform.target, canvas.getZoom()));
     };
 
     const selectHandler = (e: any) => {
@@ -33,7 +42,7 @@ const ObjectMenu: React.FC = () => {
       if (targetObject) {
         setType(targetObject.type);
         setSelected(true);
-        setPosition(getPosition(targetObject));
+        setPosition(getPosition(targetObject, canvas.getZoom()));
         targetObject.on("moving", movingHandler);
         targetObject.on("scaling", movingHandler);
 
@@ -44,7 +53,7 @@ const ObjectMenu: React.FC = () => {
         // resize fix for i-text
         if (targetObject.type === "i-text") {
           targetObject.on("changed", () => {
-            setPosition(getPosition(targetObject));
+            setPosition(getPosition(targetObject, canvas.getZoom()));
           });
         }
       }

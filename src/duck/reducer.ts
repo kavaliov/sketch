@@ -20,6 +20,13 @@ const appReducer = createReducer<Types.State, Action>(initialState)
   .handleAction(actions.setMode, (state, { payload: { mode } }) => ({
     ...state,
     mode,
-  }));
+  }))
+  .handleAction(
+    actions.setFullscreen,
+    (state, { payload: { fullscreen } }) => ({
+      ...state,
+      fullscreen,
+    })
+  );
 
 export default appReducer;

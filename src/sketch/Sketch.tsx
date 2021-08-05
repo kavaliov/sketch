@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import "fabric-history";
 import { getId } from "duck/utils";
 import { AppContext } from "duck/context";
@@ -21,6 +22,7 @@ const Sketch: React.FC = () => {
   const canvasIdRef = React.useRef<string>(getId());
   const sketchRef = React.useRef<any>(null);
   const [init, setInit] = React.useState(false);
+  const { fullscreen } = state;
 
   React.useEffect(() => {
     if (canvasIdRef.current) {
@@ -34,7 +36,11 @@ const Sketch: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={classNames(styles.wrapper, {
+        [styles.fullscreen]: fullscreen,
+      })}
+    >
       <canvas id={canvasIdRef.current} />
       {init && (
         <AppContext.Provider
