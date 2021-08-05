@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/sketch/static/css/main.7fc855ad.chunk.css",
-    "main.js": "/sketch/static/js/main.0dc7807f.chunk.js",
-    "main.js.map": "/sketch/static/js/main.0dc7807f.chunk.js.map",
+    "main.js": "/sketch/static/js/main.b433f521.chunk.js",
+    "main.js.map": "/sketch/static/js/main.b433f521.chunk.js.map",
     "runtime-main.js": "/sketch/static/js/runtime-main.8ad7e194.js",
     "runtime-main.js.map": "/sketch/static/js/runtime-main.8ad7e194.js.map",
     "static/js/2.7520a443.chunk.js": "/sketch/static/js/2.7520a443.chunk.js",
@@ -41,6 +41,7 @@
     "static/media/highlight.a5e0d7ce.svg": "/sketch/static/media/highlight.a5e0d7ce.svg",
     "static/media/italic.cf5cd34d.svg": "/sketch/static/media/italic.cf5cd34d.svg",
     "static/media/lemon.e505d6e4.svg": "/sketch/static/media/lemon.e505d6e4.svg",
+    "static/media/minimize.43572175.svg": "/sketch/static/media/minimize.43572175.svg",
     "static/media/peach.5acec3d9.svg": "/sketch/static/media/peach.5acec3d9.svg",
     "static/media/picture.b59a650c.svg": "/sketch/static/media/picture.b59a650c.svg",
     "static/media/rectangle-outlined.f492c7dd.svg": "/sketch/static/media/rectangle-outlined.f492c7dd.svg",
@@ -64,6 +65,6 @@
     "static/js/runtime-main.8ad7e194.js",
     "static/js/2.7520a443.chunk.js",
     "static/css/main.7fc855ad.chunk.css",
-    "static/js/main.0dc7807f.chunk.js"
+    "static/js/main.b433f521.chunk.js"
   ]
 }
