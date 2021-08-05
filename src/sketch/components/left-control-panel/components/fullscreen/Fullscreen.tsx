@@ -4,6 +4,7 @@ import { setFullscreen } from "duck/actions";
 import { CANVAS_SETTINGS } from "duck/constants";
 import { AppContext } from "duck/context";
 import fullscreenIcon from "./assets/fullscreen.svg";
+import minimizeIcon from "./assets/minimize.svg";
 
 const Fullscreen: React.FC = () => {
   const { canvas, state, dispatch } = React.useContext(AppContext);
@@ -29,7 +30,7 @@ const Fullscreen: React.FC = () => {
 
   return (
     <Button active={fullscreen} onClick={fullscreenHandler}>
-      <img src={fullscreenIcon} alt="" />
+      <img src={fullscreen ? minimizeIcon : fullscreenIcon} alt="" />
     </Button>
   );
 };
