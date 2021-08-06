@@ -14,8 +14,8 @@ const Background: React.FC = () => {
   const backgroundHandler = (src: string): void => {
     fabric.Image.fromURL(src, (img: any) => {
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-        scaleX: canvas.getWidth() / img.width,
-        scaleY: canvas.getHeight() / img.height,
+        scaleX: canvas.getWidth() / img.width / canvas.getZoom(),
+        scaleY: canvas.getHeight() / img.height / canvas.getZoom(),
         // @ts-ignore
         erasable: false,
       });
