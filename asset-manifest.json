@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sketch/static/css/main.7fc855ad.chunk.css",
-    "main.js": "/sketch/static/js/main.9d0c9529.chunk.js",
-    "main.js.map": "/sketch/static/js/main.9d0c9529.chunk.js.map",
+    "main.css": "/sketch/static/css/main.88f4d310.chunk.css",
+    "main.js": "/sketch/static/js/main.bcfe7169.chunk.js",
+    "main.js.map": "/sketch/static/js/main.bcfe7169.chunk.js.map",
     "runtime-main.js": "/sketch/static/js/runtime-main.8ad7e194.js",
     "runtime-main.js.map": "/sketch/static/js/runtime-main.8ad7e194.js.map",
-    "static/js/2.7520a443.chunk.js": "/sketch/static/js/2.7520a443.chunk.js",
-    "static/js/2.7520a443.chunk.js.map": "/sketch/static/js/2.7520a443.chunk.js.map",
+    "static/js/2.15e6ee76.chunk.js": "/sketch/static/js/2.15e6ee76.chunk.js",
+    "static/js/2.15e6ee76.chunk.js.map": "/sketch/static/js/2.15e6ee76.chunk.js.map",
     "index.html": "/sketch/index.html",
-    "static/css/main.7fc855ad.chunk.css.map": "/sketch/static/css/main.7fc855ad.chunk.css.map",
-    "static/js/2.7520a443.chunk.js.LICENSE.txt": "/sketch/static/js/2.7520a443.chunk.js.LICENSE.txt",
+    "static/css/main.88f4d310.chunk.css.map": "/sketch/static/css/main.88f4d310.chunk.css.map",
+    "static/js/2.15e6ee76.chunk.js.LICENSE.txt": "/sketch/static/js/2.15e6ee76.chunk.js.LICENSE.txt",
     "static/media/align-center.32449acd.svg": "/sketch/static/media/align-center.32449acd.svg",
     "static/media/align-left.277ba860.svg": "/sketch/static/media/align-left.277ba860.svg",
     "static/media/align-right.f9735e6a.svg": "/sketch/static/media/align-right.f9735e6a.svg",
@@ -27,6 +27,7 @@
     "static/media/brush3.38a28f48.svg": "/sketch/static/media/brush3.38a28f48.svg",
     "static/media/brush4.4c238ed7.svg": "/sketch/static/media/brush4.4c238ed7.svg",
     "static/media/brush5.b0040eae.svg": "/sketch/static/media/brush5.b0040eae.svg",
+    "static/media/char.7bb36b6f.svg": "/sketch/static/media/char.7bb36b6f.svg",
     "static/media/circle-outlined.55858944.svg": "/sketch/static/media/circle-outlined.55858944.svg",
     "static/media/circle.1be35666.svg": "/sketch/static/media/circle.1be35666.svg",
     "static/media/close.ae19aa75.svg": "/sketch/static/media/close.ae19aa75.svg",
@@ -63,8 +64,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.8ad7e194.js",
-    "static/js/2.7520a443.chunk.js",
-    "static/css/main.7fc855ad.chunk.css",
-    "static/js/main.9d0c9529.chunk.js"
+    "static/js/2.15e6ee76.chunk.js",
+    "static/css/main.88f4d310.chunk.css",
+    "static/js/main.bcfe7169.chunk.js"
   ]
 }
