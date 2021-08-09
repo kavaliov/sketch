@@ -71,7 +71,11 @@ const Drawing: React.FC = () => {
                 style={{
                   width: brushSize,
                   height: brushSize,
-                  backgroundColor: brush !== "magic" ? currentColor : "white",
+                  border: brush === "eraser" ? "1px solid #c3d0e4" : "none",
+                  backgroundColor:
+                    brush !== "magic" && brush !== "eraser"
+                      ? currentColor
+                      : "white",
                   opacity: brush === "marker" ? 0.2 : 1,
                   boxShadow:
                     brush === "magic" ? `0 0 30px ${currentColor}` : "none",

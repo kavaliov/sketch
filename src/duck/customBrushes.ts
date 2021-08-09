@@ -44,6 +44,7 @@ export const addPencilBrush = (f: any) => {
       b = f.util.copyCanvasElement(this.canvas.upperCanvasEl),
       c = f.util.trimCanvas(b);
     b = new f.Image(b);
+    b.crossOrigin = "Anonymous";
     this.canvas.add(b);
     b.set({
       left: c.x / a / zoom,
