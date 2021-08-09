@@ -63,12 +63,18 @@ const Drawing: React.FC = () => {
         <div className={styles.panel}>
           <div className={styles.brushSize}>
             <div className={styles.exampleWrapper}>
+              {brush === "marker" && (
+                <span className={styles.exampleText}>text</span>
+              )}
               <div
                 className={styles.example}
                 style={{
                   width: brushSize,
                   height: brushSize,
-                  backgroundColor: currentColor,
+                  backgroundColor: brush !== "magic" ? currentColor : "white",
+                  opacity: brush === "marker" ? 0.2 : 1,
+                  boxShadow:
+                    brush === "magic" ? `0 0 30px ${currentColor}` : "none",
                 }}
               />
             </div>

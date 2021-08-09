@@ -33,7 +33,7 @@ export const BRUSH_SIZE = {
     max: 90
   },
   marker: {
-    min: 1,
+    min: 20,
     max: 90
   },
   magic: {
