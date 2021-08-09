@@ -1,5 +1,12 @@
 import React from "react";
-import { Drawing, Hand, Figures, Text, Background } from "./components";
+import {
+  Drawing,
+  Hand,
+  Figures,
+  Text,
+  Background,
+  SpecialChars,
+} from "./components";
 import styles from "./RightControlPanel.module.css";
 
 const RightControlPanel: React.FC = () => (
@@ -7,6 +14,7 @@ const RightControlPanel: React.FC = () => (
     <Hand />
     <Drawing />
     <Text />
+    <SpecialChars />
     <Background />
     <Figures />
   </div>
