@@ -8,11 +8,21 @@ interface PanelType {
   opened: boolean;
   title?: string;
   onClose: () => any;
+  onTransitionEnd?: () => any;
 }
 
-const Panel: React.FC<PanelType> = ({ opened, onClose, title, children }) => {
+const Panel: React.FC<PanelType> = ({
+  opened,
+  onClose,
+  title,
+  children,
+  onTransitionEnd,
+}) => {
   return (
-    <div className={classNames(styles.wrapper, { [styles.opened]: opened })}>
+    <div
+      onTransitionEnd={onTransitionEnd}
+      className={classNames(styles.wrapper, { [styles.opened]: opened })}
+    >
       <div className={styles.header}>
         <div className={styles.title}>{title}</div>
         <Button onClick={onClose} className={styles.close}>

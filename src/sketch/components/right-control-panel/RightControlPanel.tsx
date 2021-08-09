@@ -6,6 +6,7 @@ import {
   Text,
   Background,
   SpecialChars,
+  Fraction
 } from "./components";
 import styles from "./RightControlPanel.module.css";
 
@@ -15,6 +16,7 @@ const RightControlPanel: React.FC = () => (
     <Drawing />
     <Text />
     <SpecialChars />
+    <Fraction />
     <Background />
     <Figures />
   </div>

@@ -56,7 +56,10 @@ export const changeActiveObjectColor = (
   const activeObject = canvas.getActiveObject();
 
   if (activeObject) {
-    if (activeObject.type === "activeSelection") {
+    if (
+      activeObject.type === "activeSelection" ||
+      activeObject.type === "group"
+    ) {
       (activeObject as any).forEachObject((element: any) => {
         changeObjectColor(element, color);
       });
@@ -70,7 +73,7 @@ export const changeActiveObjectColor = (
 
 const changeObjectColor = (object: any, color: string) => {
   if (
-    object.type === "path" &&
+    (object.type === "path" || object.type === "line") &&
     !object.shadow &&
     object.brushType !== "marker"
   ) {
@@ -84,6 +87,7 @@ const changeObjectColor = (object: any, color: string) => {
   if (
     object.type === "rect" ||
     object.type === "circle" ||
+    object.type === "text" ||
     object.type === "i-text" ||
     object.fromSVG
   ) {
@@ -91,7 +95,7 @@ const changeObjectColor = (object: any, color: string) => {
   }
 
   if (object.type === "path" && object.shadow) {
-    object.shadow.color = color;
+    object.set({ shadow: { ...object.shadow, color } });
   }
 
   if (object.type === "image") {

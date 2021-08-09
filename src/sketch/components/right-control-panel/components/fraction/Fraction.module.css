@@ -1,0 +1,29 @@
+.wrapper {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+
+  .separator {
+    height: 2px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    height: 36px;
+    border: 1px dashed gray;
+    border-radius: 4px;
+    padding: 0 8px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    text-align: center;
+    outline: none;
+    font-size: 19px;
+  }
+
+  .insertButton {
+    width: auto;
+    background: #006ad2;
+    color: white;
+  }
+}

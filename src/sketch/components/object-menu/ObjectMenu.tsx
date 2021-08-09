@@ -27,13 +27,13 @@ const ObjectMenu: React.FC = () => {
     const activeObject = canvas.getActiveObject();
 
     if (activeObject) {
-      setPosition(getPosition(canvas.getActiveObject(), canvas.getZoom()));
+      setPosition(getPosition(canvas.getActiveObject(), canvas));
     }
   }, [fullscreen, canvas]);
 
   React.useEffect(() => {
     const movingHandler = (e: any) => {
-      setPosition(getPosition(e.transform.target, canvas.getZoom()));
+      setPosition(getPosition(e.transform.target, canvas));
     };
 
     const selectHandler = (e: any) => {
@@ -42,7 +42,7 @@ const ObjectMenu: React.FC = () => {
       if (targetObject) {
         setType(targetObject.type);
         setSelected(true);
-        setPosition(getPosition(targetObject, canvas.getZoom()));
+        setPosition(getPosition(targetObject, canvas));
         targetObject.on("moving", movingHandler);
         targetObject.on("scaling", movingHandler);
 
@@ -53,7 +53,7 @@ const ObjectMenu: React.FC = () => {
         // resize fix for i-text
         if (targetObject.type === "i-text") {
           targetObject.on("changed", () => {
-            setPosition(getPosition(targetObject, canvas.getZoom()));
+            setPosition(getPosition(targetObject, canvas));
           });
         }
       }

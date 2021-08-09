@@ -4,3 +4,4 @@ export { default as Figures } from "./figures";
 export { default as Text } from "./text";
 export { default as Background } from "./background";
 export { default as SpecialChars } from "./special-chars";
+export { default as Fraction } from "./fraction";
