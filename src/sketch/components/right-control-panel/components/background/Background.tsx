@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Panel } from "components";
 import { AppContext } from "duck/context";
-import { CANVAS_SETTINGS } from "duck/constants";
 import { BACKGROUNDS, BACKGROUND_COLORS } from "./assets";
 import starIcon from "./assets/picture.svg";
 import styles from "./Background.module.css";
@@ -10,13 +9,14 @@ const { fabric } = window;
 
 const Background: React.FC = () => {
   const [opened, setOpened] = React.useState(false);
-  const { canvas } = React.useContext(AppContext);
+  const { canvas, state } = React.useContext(AppContext);
+  const { width, height } = state;
 
   const backgroundHandler = (src: string): void => {
     fabric.Image.fromURL(src, (img: any) => {
       canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-        scaleX: CANVAS_SETTINGS.width / img.width,
-        scaleY: CANVAS_SETTINGS.height / img.height,
+        scaleX: width / img.width,
+        scaleY: height / img.height,
         // @ts-ignore
         erasable: false,
       });

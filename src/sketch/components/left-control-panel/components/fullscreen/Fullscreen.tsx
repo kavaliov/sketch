@@ -1,14 +1,13 @@
 import React from "react";
 import { Button } from "components";
 import { setFullscreen } from "duck/actions";
-import { CANVAS_SETTINGS } from "duck/constants";
 import { AppContext } from "duck/context";
 import fullscreenIcon from "./assets/fullscreen.svg";
 import minimizeIcon from "./assets/minimize.svg";
 
 const Fullscreen: React.FC = () => {
   const { canvas, state, dispatch } = React.useContext(AppContext);
-  const { fullscreen } = state;
+  const { fullscreen, width, height } = state;
 
   const fullscreenHandler = () => {
     canvas.setDimensions({
@@ -18,12 +17,12 @@ const Fullscreen: React.FC = () => {
             height: window.innerHeight,
           }
         : {
-            width: CANVAS_SETTINGS.width,
-            height: CANVAS_SETTINGS.height,
+            width,
+            height,
           }),
     });
 
-    const zoom = window.innerWidth / CANVAS_SETTINGS.width;
+    const zoom = window.innerWidth / width;
     canvas.setZoom(!fullscreen ? zoom : 1);
     dispatch(setFullscreen({ fullscreen: !fullscreen }));
   };

@@ -1,12 +1,16 @@
+import { Dispatch } from "react";
 import { fabric as FabricType } from "fabric";
 import { FABRIC_SETTINGS } from "./constants";
 import { addPencilBrush } from "./customBrushes";
+import { aliSupport } from "./aliSupport";
 import { addOpacity } from "./utils";
+import { removeUsedAnswer } from "./actions";
 
 const { fabric } = window;
 
 export const setSketchSettings = (
-  canvas: FabricType.Canvas | undefined
+  canvas: FabricType.Canvas | undefined,
+  dispatch: Dispatch<any>
 ): void => {
   if (canvas) {
     // Initial canvas setup
@@ -20,14 +24,15 @@ export const setSketchSettings = (
     canvas.setBackgroundColor("white", canvas.renderAll.bind(canvas), {
       erasable: false,
     });
-    addPencilBrush(fabric);
+    addPencilBrush();
+    aliSupport();
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Backspace") {
         const selectedObject = canvas.getActiveObject();
         // @ts-ignore
         if (selectedObject && !selectedObject.isEditing) {
-          removeSelectedObject(canvas, selectedObject);
+          removeSelectedObject(canvas, selectedObject, dispatch);
         }
       }
     });
@@ -36,14 +41,22 @@ export const setSketchSettings = (
 
 export const removeSelectedObject = (
   canvas: FabricType.Canvas,
-  selectedObject: any
+  selectedObject: any,
+  dispatch: Dispatch<any>
 ) => {
   if (selectedObject && selectedObject.type === "activeSelection") {
     (selectedObject as any).forEachObject((element: any) => {
       canvas.remove(element);
+
+      if (element.answerID) {
+        dispatch(removeUsedAnswer({ usedAnswer: element.answerID }));
+      }
     });
   } else {
     canvas.remove(selectedObject);
+    if (selectedObject.answerID) {
+      dispatch(removeUsedAnswer({ usedAnswer: selectedObject.answerID }));
+    }
   }
 
   canvas.discardActiveObject().requestRenderAll();
@@ -87,6 +100,8 @@ const changeObjectColor = (object: any, color: string) => {
   if (
     object.type === "rect" ||
     object.type === "circle" ||
+    object.type === "ellipse" ||
+    object.type === "triangle" ||
     object.type === "text" ||
     object.type === "i-text" ||
     object.fromSVG

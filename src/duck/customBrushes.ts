@@ -3,8 +3,10 @@
 
 // https://github.com/av01d/fabric-brushes/blob/main/dist/fabric.brushes.min.js
 
-export const addPencilBrush = (f: any) => {
-  f.util.trimCanvas = function (a) {
+const { fabric } = window;
+
+export const addPencilBrush = () => {
+  fabric.util.trimCanvas = function (a) {
     for (
       var b = a.getContext("2d"),
         c = a.width,
@@ -32,18 +34,18 @@ export const addPencilBrush = (f: any) => {
     b.putImageData(l, 0, 0);
     return { x: g[0], y: h[0] };
   };
-  f.Point.prototype.normalize = function (a) {
+  fabric.Point.prototype.normalize = function (a) {
     if (null === a || void 0 === a) a = 1;
     var b = this.distanceFrom({ x: 0, y: 0 });
     0 < b && ((this.x = (this.x / b) * a), (this.y = (this.y / b) * a));
     return this;
   };
-  f.BaseBrush.prototype.convertToImg = function () {
+  fabric.BaseBrush.prototype.convertToImg = function () {
     var zoom = this.canvas.getZoom();
     var a = this.canvas.getRetinaScaling(),
-      b = f.util.copyCanvasElement(this.canvas.upperCanvasEl),
-      c = f.util.trimCanvas(b);
-    b = new f.Image(b);
+      b = fabric.util.copyCanvasElement(this.canvas.upperCanvasEl),
+      c = fabric.util.trimCanvas(b);
+    b = new fabric.Image(b);
     b.crossOrigin = "Anonymous";
     this.canvas.add(b);
     b.set({
@@ -54,15 +56,15 @@ export const addPencilBrush = (f: any) => {
     }).setCoords();
     this.canvas.clearContext(this.canvas.contextTop);
   };
-  f.util.getRandom = function (a, b) {
+  fabric.util.getRandom = function (a, b) {
     b = b ? b : 0;
     return Math.random() * ((a ? a : 1) - b) + b;
   };
-  f.util.clamp = function (a, b, c) {
+  fabric.util.clamp = function (a, b, c) {
     "number" !== typeof c && (c = 0);
     return a > b ? b : a < c ? c : a;
   };
-  f.CrayonBrush = f.util.createClass(f.BaseBrush, {
+  fabric.CrayonBrush = fabric.util.createClass(fabric.BaseBrush, {
     color: "#000",
     opacity: 0.6,
     width: 1,
@@ -80,7 +82,7 @@ export const addPencilBrush = (f: any) => {
       this.width = b.width || a.freeDrawingBrush.width;
       this.color = b.color || a.freeDrawingBrush.color;
       this.opacity = b.opacity || a.contextTop.globalAlpha;
-      this._point = new f.Point(0, 0);
+      this._point = new fabric.Point(0, 0);
     },
     onMouseDown: function (a) {
       this.canvas.contextTop.globalAlpha = this.opacity;
@@ -101,8 +103,8 @@ export const addPencilBrush = (f: any) => {
     set: function (a) {
       this._latest
         ? this._latest.setFromPoint(this._point)
-        : (this._latest = new f.Point(a.x, a.y));
-      f.Point.prototype.setFromPoint.call(this._point, a);
+        : (this._latest = new fabric.Point(a.x, a.y));
+      fabric.Point.prototype.setFromPoint.call(this._point, a);
     },
     update: function (a) {
       this.set(a);
@@ -119,7 +121,11 @@ export const addPencilBrush = (f: any) => {
       c.normalize(e);
       var h =
         this._sep *
-        f.util.clamp((this._inkAmount / this._latestStrokeLength) * 3, 1, 0.5);
+        fabric.util.clamp(
+          (this._inkAmount / this._latestStrokeLength) * 3,
+          1,
+          0.5
+        );
       var l = Math.ceil(this._size * this._sep);
       var m = this._size / 2;
       a.save();
@@ -128,10 +134,10 @@ export const addPencilBrush = (f: any) => {
       for (e = 0; e < l; e++)
         for (b = 0; b < g; b++) {
           var k = this._latest.add(c.multiply(b));
-          var n = f.util.getRandom(m);
-          var p = f.util.getRandom(2 * Math.PI);
-          var q = f.util.getRandom(h, h / 2);
-          var r = f.util.getRandom(h, h / 2);
+          var n = fabric.util.getRandom(m);
+          var p = fabric.util.getRandom(2 * Math.PI);
+          var q = fabric.util.getRandom(h, h / 2);
+          var r = fabric.util.getRandom(h, h / 2);
           var t = k.x + n * Math.sin(p) - q / 2;
           k = k.y + n * Math.cos(p) - r / 2;
           a.rect(t * zoom, k * zoom, q, r);

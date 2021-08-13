@@ -1,12 +1,18 @@
-.wrapper {
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  grid-gap: calc(8px * 1.5);
+  gap: calc(8px * 1.5);
+  margin-top: 8px;
+}
+
+.canvasWrapper {
   overflow: hidden;
   position: relative;
-  margin: 100px auto;
   user-select: none;
   border: 1px solid #c4d0e4;
   border-radius: 4px;
-  width: 970px;
-  height: 518px;
 
   &.fullscreen {
     position: fixed;

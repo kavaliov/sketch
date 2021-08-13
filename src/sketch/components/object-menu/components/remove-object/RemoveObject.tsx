@@ -5,11 +5,11 @@ import remove from "./assets/delete.svg";
 import { AppContext } from "duck/context";
 
 const RemoveObject: React.FC = () => {
-  const { canvas } = React.useContext(AppContext);
+  const { canvas, dispatch } = React.useContext(AppContext);
 
   const removeHandler = () => {
     const activeObject = canvas.getActiveObject();
-    removeSelectedObject(canvas, activeObject);
+    removeSelectedObject(canvas, activeObject, dispatch);
   };
 
   return (

@@ -13,11 +13,32 @@ export interface AppContext {
   dispatch: AnyDispatch;
 }
 
+export interface AnswerType {
+  id: number | string;
+  sort: number;
+  type: "image" | "textbox" | "svg";
+  value?: string;
+  width: number;
+  height: number;
+  options: {
+    width?: number;
+    height?: number;
+    fontSize?: number;
+    fontFamily?: string;
+    fill?: string;
+  };
+  selected?: boolean;
+}
+
 export interface State {
   currentColor: string;
   mode: Mode;
   brushType: BrushType;
   fullscreen: boolean;
+  width: number;
+  height: number;
+  answers: AnswerType[];
+  usedAnswers: string[];
 }
 
 export interface Range {
