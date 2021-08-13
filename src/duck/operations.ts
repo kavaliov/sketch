@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
 import { fabric as FabricType } from "fabric";
+import { addPencilBrush } from "legacy/customBrushes";
+import { aliSupport } from "legacy/aliSupport";
 import { FABRIC_SETTINGS } from "./constants";
-import { addPencilBrush } from "./customBrushes";
-import { aliSupport } from "./aliSupport";
 import { addOpacity } from "./utils";
 import { removeUsedAnswer } from "./actions";
 
