@@ -20,6 +20,10 @@ const Drawing: React.FC = () => {
   React.useEffect(() => {
     const pathCreateHandler = (e: any) => {
       e.path.brushType = brush;
+
+      if (brush === "eraser") {
+        canvas.fire("object:erased");
+      }
     };
 
     canvas.on("path:created", pathCreateHandler);

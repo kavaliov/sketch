@@ -9,8 +9,8 @@ export const updateCanvasState = (
   if (!historyConfig.undoStatus && !historyConfig.redoStatus) {
     const canvasAsJson = canvas.toJSON();
     if (
-      historyConfig.currentStateIndex <
-      historyConfig.canvasState.length - 1
+      historyConfig.currentStateIndex !== 0 &&
+      historyConfig.currentStateIndex < historyConfig.canvasState.length - 1
     ) {
       const indexToBeInserted = historyConfig.currentStateIndex + 1;
       const numberOfElementsToRetain = indexToBeInserted + 1;
@@ -20,7 +20,10 @@ export const updateCanvasState = (
         numberOfElementsToRetain
       );
     } else {
-      historyConfig.canvasState.push(canvasAsJson);
+      // @ts-ignore
+      if (canvasAsJson.objects.length > 0) {
+        historyConfig.canvasState.push(canvasAsJson);
+      }
     }
     historyConfig.currentStateIndex = historyConfig.canvasState.length - 1;
 
@@ -62,13 +65,13 @@ export const undo = (
             }
           );
         } else if (historyConfig.currentStateIndex === 0) {
-          canvas.remove(...canvas.getObjects());
           historyConfig.undoFinishedStatus = 1;
+          canvas.remove(...canvas.getObjects());
           setDisabled(() => ({
             undo: true,
             redo: false,
           }));
-          historyConfig.currentStateIndex -= 1;
+          historyConfig.currentStateIndex = -1;
         }
       }
     }
@@ -86,6 +89,10 @@ export const redo = (
         historyConfig.canvasState.length - 1 &&
       historyConfig.currentStateIndex !== -1
     ) {
+      setDisabled((disableState: any) => ({
+        ...disableState,
+        redo: true,
+      }));
     } else {
       if (
         historyConfig.canvasState.length > historyConfig.currentStateIndex &&

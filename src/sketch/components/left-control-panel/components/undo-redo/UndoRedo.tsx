@@ -19,11 +19,13 @@ const UndoRedo: React.FC = () => {
     const canvasStateHandler = () =>
       updateCanvasState(canvas, configRef.current, setDisabled);
 
+    canvas.on("object:erased", canvasStateHandler);
     canvas.on("object:modified", canvasStateHandler);
     canvas.on("object:added", canvasStateHandler);
     canvas.on("object:removed", canvasStateHandler);
 
     return () => {
+      canvas.off("object:erased", canvasStateHandler);
       canvas.off("object:modified", canvasStateHandler);
       canvas.off("object:added", canvasStateHandler);
       canvas.off("object:removed", canvasStateHandler);
