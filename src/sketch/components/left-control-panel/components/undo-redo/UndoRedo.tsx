@@ -1,42 +1,47 @@
-// @ts-nocheck
 import React from "react";
 import { Button } from "components";
 import { AppContext } from "duck/context";
+import { updateCanvasState, undo, redo } from "./duck/operations";
+import { initialConfig } from "./duck/constants";
+import { HistoryConfig } from "./duck/types";
 import undoIcon from "./assets/undo.svg";
 import redoIcon from "./assets/redo.svg";
 
 const UndoRedo: React.FC = () => {
-  const [redoActive, setRedoActive] = React.useState(false);
-  const [undoActive, setUndoActive] = React.useState(false);
+  const configRef = React.useRef<HistoryConfig>(initialConfig);
+  const [disabled, setDisabled] = React.useState<any>({
+    undo: true,
+    redo: true,
+  });
   const { canvas } = React.useContext(AppContext);
 
-  const activeCheck = React.useCallback(() => {
-    setUndoActive(!!canvas.historyUndo.length);
-    setRedoActive(!!canvas.historyRedo.length);
-  }, [canvas]);
-
   React.useEffect(() => {
-    canvas.on("history:append", activeCheck);
-  }, [canvas, activeCheck]);
+    const canvasStateHandler = () =>
+      updateCanvasState(canvas, configRef.current, setDisabled);
 
-  const undoHandler = (): void => {
-    canvas.discardActiveObject();
-    canvas.undo();
-    activeCheck();
-  };
+    canvas.on("object:modified", canvasStateHandler);
+    canvas.on("object:added", canvasStateHandler);
+    canvas.on("object:removed", canvasStateHandler);
 
-  const redoHandler = (): void => {
-    canvas.discardActiveObject();
-    canvas.redo();
-    activeCheck();
-  };
+    return () => {
+      canvas.off("object:modified", canvasStateHandler);
+      canvas.off("object:added", canvasStateHandler);
+      canvas.off("object:removed", canvasStateHandler);
+    };
+  }, [canvas]);
 
   return (
     <>
-      <Button disabled={!undoActive} onClick={undoHandler}>
+      <Button
+        disabled={disabled.undo}
+        onClick={() => undo(canvas, configRef.current, setDisabled)}
+      >
         <img src={undoIcon} alt="" />
       </Button>
-      <Button disabled={!redoActive} onClick={redoHandler}>
+      <Button
+        disabled={disabled.redo}
+        onClick={() => redo(canvas, configRef.current, setDisabled)}
+      >
         <img src={redoIcon} alt="" />
       </Button>
     </>

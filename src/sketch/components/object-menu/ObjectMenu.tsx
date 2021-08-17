@@ -4,7 +4,7 @@ import { AppContext } from "duck/context";
 import { getPosition } from "./duck/utils";
 import { removeEmptyTextbox } from "./duck/operations";
 import {
-  CurrentColor,
+  ColorApply,
   RemoveObject,
   Copy,
   BoldText,
@@ -22,6 +22,12 @@ const ObjectMenu: React.FC = () => {
   const [position, setPosition] = React.useState({ top: 0, left: 0 });
   const { canvas, state } = React.useContext(AppContext);
   const { fullscreen } = state;
+
+  const withColorApply =
+    !fromImgShape &&
+    type !== "answerTextbox" &&
+    type !== "answerImage" &&
+    type !== "answerSvg";
 
   React.useEffect(() => {
     const activeObject = canvas.getActiveObject();
@@ -50,7 +56,7 @@ const ObjectMenu: React.FC = () => {
           setFromImgShape(true);
         }
 
-        // resize fix for i-text
+        // resize for i-text
         if (targetObject.type === "i-text") {
           targetObject.on("changed", () => {
             setPosition(getPosition(targetObject, canvas));
@@ -82,9 +88,11 @@ const ObjectMenu: React.FC = () => {
       {selected && (
         <div
           style={{ ...position }}
-          className={classNames(styles.wrapper, { [styles.img]: fromImgShape })}
+          className={classNames(styles.wrapper, {
+            [styles.withColorApply]: withColorApply,
+          })}
         >
-          {!fromImgShape && <CurrentColor />}
+          {withColorApply && <ColorApply />}
           <RemoveObject />
           <Copy />
           {type === "i-text" && (

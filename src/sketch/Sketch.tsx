@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import "fabric-history";
 import { getId } from "duck/utils";
 import { AppContext } from "duck/context";
 import appReducer from "duck/reducer";
@@ -51,6 +50,7 @@ const Sketch: React.FC<SketchProps> = ({
       sketchRef.current = new fabric.Canvas(canvasIdRef.current, {
         ...CANVAS_SETTINGS,
         ...(width ? { width } : {}),
+        ...(height ? { height } : {}),
       });
       setSketchSettings(sketchRef.current, dispatch);
       setInit(true);

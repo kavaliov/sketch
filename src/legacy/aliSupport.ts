@@ -21,9 +21,8 @@ export const aliSupport = (): void => {
   fabric.AnswerImage = fabric.util.createClass(fabric.Image, {
     type: "answerImage",
 
-    initialize: function initialize(src, options, fn) {
+    initialize: function initialize(src, options = {}, fn) {
       const this$1 = this;
-      if (options === void 0) options = {};
 
       options = Object.assign(
         {},
@@ -84,7 +83,7 @@ export const aliSupport = (): void => {
   fabric.AnswerSvg = fabric.util.createClass(fabric.Image, {
     type: "answerSvg",
 
-    initialize: function initialize(html: any, options: any, fn: any) {
+    initialize: function initialize(html: any, options = {}, fn: any) {
       const fontSize = options.fontSize ? options.fontSize + "px" : "initial";
       const span = `<span 
                       xmlns="http://www.w3.org/1999/xhtml"
@@ -114,12 +113,7 @@ export const aliSupport = (): void => {
       const height = Math.ceil(tempAnswerRect.height);
       $tempAnswer.remove();
 
-      var url = getImageUrlFromSvg(span, width, height);
-
       const this$1 = this;
-
-      if (options === void 0) options = {};
-
       options = Object.assign(
         {},
         {
@@ -127,14 +121,14 @@ export const aliSupport = (): void => {
         },
         options
       );
-      var image = new Image();
-      image.onload = function (e) {
+      const image = new Image();
+      image.onload = function () {
         this$1.setWidth(this$1.width || options.width || image.width);
         this$1.setHeight(this$1.height || options.height || image.height);
         this$1.setCoords();
         this$1.canvas.renderAll();
       };
-      image.src = url;
+      image.src = getImageUrlFromSvg(span, width, height);
       this.callSuper("initialize", image, options);
       this.setControlsVisibility({
         bl: true,
@@ -157,6 +151,7 @@ export const aliSupport = (): void => {
 
     toObject: function toObject() {
       return Object.assign(this.callSuper("toObject"), {
+        fontFamily: this.get("fontFamily"),
         answerID: this.get("answerID"),
         html: this.get("html"),
       });
@@ -170,11 +165,7 @@ export const aliSupport = (): void => {
   fabric.AnswerTextbox = fabric.util.createClass(fabric.Textbox, {
     type: "answerTextbox",
 
-    initialize: function initialize(object, options) {
-      if (!options) {
-        options = {};
-      }
-
+    initialize: function initialize(object, options = {}) {
       options = {
         editable: false,
         fontSize: 16,

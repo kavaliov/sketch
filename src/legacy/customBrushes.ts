@@ -41,19 +41,18 @@ export const addPencilBrush = () => {
     return this;
   };
   fabric.BaseBrush.prototype.convertToImg = function () {
-    var zoom = this.canvas.getZoom();
+    const zoom = this.canvas.getZoom();
     var a = this.canvas.getRetinaScaling(),
       b = fabric.util.copyCanvasElement(this.canvas.upperCanvasEl),
       c = fabric.util.trimCanvas(b);
-    b = new fabric.Image(b);
-    b.crossOrigin = "Anonymous";
-    this.canvas.add(b);
-    b.set({
+    b = new fabric.Image(b, {
       left: c.x / a / zoom,
       top: c.y / a / zoom,
       scaleX: 1 / a / zoom,
       scaleY: 1 / a / zoom,
-    }).setCoords();
+    });
+    b.crossOrigin = "Anonymous";
+    this.canvas.add(b);
     this.canvas.clearContext(this.canvas.contextTop);
   };
   fabric.util.getRandom = function (a, b) {

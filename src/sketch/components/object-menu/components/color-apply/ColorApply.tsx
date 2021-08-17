@@ -3,7 +3,7 @@ import { AppContext } from "duck/context";
 import { changeActiveObjectColor } from "duck/operations";
 import { Button } from "components";
 
-const CurrentColor: React.FC = () => {
+const ColorApply: React.FC = () => {
   const { canvas, state } = React.useContext(AppContext);
   const { currentColor } = state;
 
@@ -19,4 +19,4 @@ const CurrentColor: React.FC = () => {
   );
 };
 
-export default CurrentColor;
+export default ColorApply;
