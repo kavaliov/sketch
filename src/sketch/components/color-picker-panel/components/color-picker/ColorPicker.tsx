@@ -45,7 +45,7 @@ const ColorPicker: React.FC<ColorPickerType> = ({
     }
   };
 
-  const canvasMouseDownHandler = (e: any) => {
+  const canvasMouseDownHandler = (e: any): void => {
     setDragging(true);
     if (wrapperRef.current) {
       setPositionX(
@@ -54,10 +54,20 @@ const ColorPicker: React.FC<ColorPickerType> = ({
     }
   };
 
+  const canvasMouseLeaveHandler = (e: any): void => {
+    if (dragging) {
+      setDragging(false);
+      if (typeof onChange === "function") {
+        onChange(color);
+      }
+    }
+  };
+
   return (
     <div
       ref={wrapperRef}
       onMouseMove={mouseMoveHandler}
+      onMouseLeave={canvasMouseLeaveHandler}
       className={styles.wrapper}
       style={{ width, height }}
     >

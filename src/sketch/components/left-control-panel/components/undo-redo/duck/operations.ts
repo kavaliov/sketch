@@ -62,7 +62,7 @@ export const undo = (
             }
           );
         } else if (historyConfig.currentStateIndex === 0) {
-          canvas.clear();
+          canvas.remove(...canvas.getObjects());
           historyConfig.undoFinishedStatus = 1;
           setDisabled(() => ({
             undo: true,
