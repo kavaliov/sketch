@@ -20,25 +20,16 @@ const getImageUrlFromSvg = (html, width, height) => {
 export const aliSupport = (): void => {
   fabric.AnswerImage = fabric.util.createClass(fabric.Image, {
     type: "answerImage",
-
     initialize: function initialize(src, options = {}, fn) {
-      const this$1 = this;
+      options = { ...options, editable: false };
 
-      options = Object.assign(
-        {},
-        {
-          editable: false,
-        },
-        options
-      );
       // Setup image object to pass along to `fabric.Image`.
       const image = new Image();
-
-      image.onload = function () {
-        this$1.setHeight(this$1.height || options.height || image.height);
-        this$1.setWidth(this$1.width || options.width || image.width);
-        this$1.setCoords();
-        this$1.canvas.renderAll();
+      image.onload = () => {
+        this.setHeight(this.height || options.height || image.height);
+        this.setWidth(this.width || options.width || image.width);
+        this.setCoords();
+        this.canvas.renderAll();
       };
 
       image.src = src;
@@ -73,12 +64,12 @@ export const aliSupport = (): void => {
       });
       fn && fn(this);
     },
-
     toObject: function toObject() {
-      return Object.assign(this.callSuper("toObject"), {
+      return {
+        ...this.callSuper("toObject"),
         answerID: this.get("answerID"),
         scaledSize: this.get("scaledSize"),
-      });
+      };
     },
   });
 

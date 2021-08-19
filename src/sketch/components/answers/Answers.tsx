@@ -23,7 +23,7 @@ const Answers: React.FC<AnswersType> = ({ target }) => {
     };
 
     const undoRedoHandler = (e: any) => {
-      if (e.object.answerID) {
+      if (e.object?.answerID) {
         if (
           e.actionType === "added" &&
           !usedAnswers.includes(e.object.answerID)
@@ -31,10 +31,7 @@ const Answers: React.FC<AnswersType> = ({ target }) => {
           dispatch(addUsedAnswer({ usedAnswer: e.object.answerID }));
         }
 
-        if (
-          e.actionType === "removed" &&
-          usedAnswers.includes(e.object.answerID)
-        ) {
+        if (e.actionType === "removed") {
           dispatch(removeUsedAnswer({ usedAnswer: e.object.answerID }));
         }
       }
@@ -46,7 +43,7 @@ const Answers: React.FC<AnswersType> = ({ target }) => {
 
     return () => {
       canvas.off("drop", dropHandler);
-      canvas.off("history:undo", undoRedoHandler);
+      canvas.off("history:redo", undoRedoHandler);
       canvas.off("history:undo", undoRedoHandler);
     };
   }, [canvas, dispatch, usedAnswers]);

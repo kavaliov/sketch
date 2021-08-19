@@ -20,46 +20,40 @@ export const CANVAS_SETTINGS = {
 
 export const answers: AnswerType[] = [
   {
-    id: "57425",
+    id: "57518",
     sort: 1,
     type: "textbox",
-    width: 200,
+    width: 300,
     height: 0,
     value:
-      "<b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br />Animi aperiam aut autem consectetur ea excepturi explicabo facere hic illum inventore ipsam, nulla numquam, obcaecati, quam quas recusandae tenetur ut veritatis?</b>",
+      "<b>Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer Answer </b>",
     options: {
       fontSize: 16,
       fontFamily: "Georgia",
       fill: "black",
-      width: 300,
     },
   },
   {
-    id: "57426",
-    sort: 1,
-    type: "image",
-    width: 50,
-    height: 50,
-    value:
-      "https://backend25-dev.acceleratelearning.com/system/part_type_graphic_organizer_answer/images/57426/original/pngtree-hand-drawn-little-girl-cartoon-lively-little-girl-cute-little-girl-png-image_491210.jpeg?1628770578",
-    options: {
-      width: 50,
-      height: 50,
-    },
-  },
-  {
-    id: "57427",
+    id: "57519",
     sort: 1,
     type: "textbox",
     width: 0,
     height: 0,
-    value: "simple",
+    value: "123123",
     options: {
       fontSize: 16,
       fontFamily: "Arial",
       fill: "black",
-      width: 0,
-      height: 0,
     },
+  },
+  {
+    id: "57520",
+    sort: 1,
+    type: "image",
+    width: 70,
+    height: 70,
+    value:
+      "https://backend25-qa.acceleratelearning.com/system/part_type_graphic_organizer_answer/images/57520/original/pngtree-hand-drawn-little-girl-cartoon-lively-little-girl-cute-little-girl-png-image_491210.jpeg?1628895006",
+    options: { width: 100, height: 100 },
   },
 ];

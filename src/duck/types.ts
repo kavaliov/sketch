@@ -18,8 +18,8 @@ export interface AnswerType {
   sort: number;
   type: "image" | "textbox" | "svg";
   value?: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   options: {
     width?: number;
     height?: number;

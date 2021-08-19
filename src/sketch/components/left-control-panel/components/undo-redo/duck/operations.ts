@@ -152,21 +152,25 @@ const fireEvent = (
   if (newObjects.length > prevObjects.length) {
     delta.actionType = "added";
 
-    newObjects.forEach((object: any, index: number) => {
-      if (!prevObjects[index]) {
-        delta.object = object;
-      }
-    });
+    delta.object = newObjects.filter(
+      (newObject: any) =>
+        !prevObjects.find(
+          (prevObject: any) =>
+            JSON.stringify(prevObject) === JSON.stringify(newObject)
+        )
+    )[0];
   }
 
   if (newObjects.length < prevObjects.length) {
     delta.actionType = "removed";
 
-    prevObjects.forEach((object: any, index: number) => {
-      if (!newObjects[index]) {
-        delta.object = object;
-      }
-    });
+    delta.object = prevObjects.filter(
+      (prevObject: any) =>
+        !newObjects.find(
+          (newObject: any) =>
+            JSON.stringify(prevObject) === JSON.stringify(newObject)
+        )
+    )[0];
   }
 
   if (newObjects.length === prevObjects.length) {
