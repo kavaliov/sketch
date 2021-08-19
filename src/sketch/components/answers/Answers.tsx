@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { addUsedAnswer } from "duck/actions";
+import { addUsedAnswer, removeUsedAnswer } from "duck/actions";
 import { AnswerType } from "duck/types";
 import { AppContext } from "duck/context";
 import { Answer } from "./components";
@@ -15,13 +15,41 @@ const Answers: React.FC<AnswersType> = ({ target }) => {
   const { answers, usedAnswers } = state;
 
   React.useEffect(() => {
-    canvas.on("drop", (event: any) => {
+    const dropHandler = (event: any): void => {
       event.e.preventDefault();
       const answer = JSON.parse(event.e.dataTransfer.getData("data"));
       renderAnswer(canvas, answer, event);
       dispatch(addUsedAnswer({ usedAnswer: answer.id }));
-    });
-  }, [canvas, dispatch]);
+    };
+
+    const undoRedoHandler = (e: any) => {
+      if (e.object.answerID) {
+        if (
+          e.actionType === "added" &&
+          !usedAnswers.includes(e.object.answerID)
+        ) {
+          dispatch(addUsedAnswer({ usedAnswer: e.object.answerID }));
+        }
+
+        if (
+          e.actionType === "removed" &&
+          usedAnswers.includes(e.object.answerID)
+        ) {
+          dispatch(removeUsedAnswer({ usedAnswer: e.object.answerID }));
+        }
+      }
+    };
+
+    canvas.on("drop", dropHandler);
+    canvas.on("history:undo", undoRedoHandler);
+    canvas.on("history:redo", undoRedoHandler);
+
+    return () => {
+      canvas.off("drop", dropHandler);
+      canvas.off("history:undo", undoRedoHandler);
+      canvas.off("history:undo", undoRedoHandler);
+    };
+  }, [canvas, dispatch, usedAnswers]);
 
   return ReactDOM.createPortal(
     <>

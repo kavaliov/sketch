@@ -48,8 +48,9 @@ export const aliSupport = (): void => {
         width: "",
         height: "",
       });
-      this.scaleToHeight(options.height);
-      this.scaleToWidth(options.width);
+
+      this.scaleToHeight(options.height || image.height);
+      this.scaleToWidth(options.width || image.width);
 
       this.setControlsVisibility({
         bl: true,
@@ -66,18 +67,26 @@ export const aliSupport = (): void => {
       this.lockUniScaling = true;
       this.lockRotation = true;
       this.set("answerID", options.answerID || "");
+      this.set("scaledSize", {
+        height: options.height || image.height,
+        width: options.width || image.width,
+      });
       fn && fn(this);
     },
 
     toObject: function toObject() {
       return Object.assign(this.callSuper("toObject"), {
         answerID: this.get("answerID"),
+        scaledSize: this.get("scaledSize"),
       });
     },
   });
 
   fabric.AnswerImage.fromObject = function (object, callback) {
-    return new fabric.AnswerImage(object.src, object, callback);
+    const answerObject = new fabric.AnswerImage(object.src, object, callback);
+    answerObject.scaleToHeight(object.scaledSize.height);
+    answerObject.scaleToWidth(object.scaledSize.width);
+    return answerObject;
   };
 
   fabric.AnswerSvg = fabric.util.createClass(fabric.Image, {
@@ -114,13 +123,7 @@ export const aliSupport = (): void => {
       $tempAnswer.remove();
 
       const this$1 = this;
-      options = Object.assign(
-        {},
-        {
-          editable: false,
-        },
-        options
-      );
+      options = { ...options, editable: false };
       const image = new Image();
       image.onload = function () {
         this$1.setWidth(this$1.width || options.width || image.width);
@@ -145,6 +148,7 @@ export const aliSupport = (): void => {
       this.lockUniScaling = true;
       this.lockRotation = true;
       this.set("answerID", options.answerID || "");
+      this.set("height", height || "");
       this.set("html", html);
       fn && fn(this);
     },
@@ -152,6 +156,7 @@ export const aliSupport = (): void => {
     toObject: function toObject() {
       return Object.assign(this.callSuper("toObject"), {
         fontFamily: this.get("fontFamily"),
+        height: this.get("height"),
         answerID: this.get("answerID"),
         html: this.get("html"),
       });

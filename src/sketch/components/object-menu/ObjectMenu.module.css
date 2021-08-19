@@ -11,4 +11,8 @@
   &.withColorApply {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  &.withoutCopy {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

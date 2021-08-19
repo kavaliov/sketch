@@ -29,6 +29,9 @@ const ObjectMenu: React.FC = () => {
     type !== "answerImage" &&
     type !== "answerSvg";
 
+  const withCopy =
+    type !== "answerTextbox" && type !== "answerImage" && type !== "answerSvg";
+
   React.useEffect(() => {
     const activeObject = canvas.getActiveObject();
 
@@ -90,11 +93,12 @@ const ObjectMenu: React.FC = () => {
           style={{ ...position }}
           className={classNames(styles.wrapper, {
             [styles.withColorApply]: withColorApply,
+            [styles.withoutCopy]: !withCopy,
           })}
         >
           {withColorApply && <ColorApply />}
           <RemoveObject />
-          <Copy />
+          {withCopy && <Copy />}
           {type === "i-text" && (
             <>
               <BoldText />

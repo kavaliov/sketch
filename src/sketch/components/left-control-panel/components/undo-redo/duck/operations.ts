@@ -52,6 +52,12 @@ export const undo = (
           canvas.loadFromJSON(
             historyConfig.canvasState[historyConfig.currentStateIndex - 1],
             () => {
+              fireEvent(
+                canvas,
+                historyConfig.canvasState[historyConfig.currentStateIndex],
+                historyConfig.canvasState[historyConfig.currentStateIndex - 1],
+                "undo"
+              );
               canvas.renderAll();
               historyConfig.undoStatus = false;
               historyConfig.currentStateIndex -= 1;
@@ -65,6 +71,12 @@ export const undo = (
             }
           );
         } else if (historyConfig.currentStateIndex === 0) {
+          fireEvent(
+            canvas,
+            historyConfig.canvasState[historyConfig.currentStateIndex],
+            { ...historyConfig.canvasState[0], objects: [] },
+            "undo"
+          );
           historyConfig.undoFinishedStatus = 1;
           canvas.remove(...canvas.getObjects());
           setDisabled(() => ({
@@ -103,6 +115,12 @@ export const redo = (
         canvas.loadFromJSON(
           historyConfig.canvasState[historyConfig.currentStateIndex + 1],
           () => {
+            fireEvent(
+              canvas,
+              historyConfig.canvasState[historyConfig.currentStateIndex],
+              historyConfig.canvasState[historyConfig.currentStateIndex + 1],
+              "redo"
+            );
             canvas.renderAll();
             historyConfig.redoStatus = false;
             historyConfig.currentStateIndex += 1;
@@ -119,4 +137,52 @@ export const redo = (
       }
     }
   }
+};
+
+const fireEvent = (
+  canvas: FabricType.Canvas,
+  prevState: any,
+  newState: any,
+  eventType: "redo" | "undo"
+): void => {
+  const delta: any = {};
+  const prevObjects = prevState?.objects || [];
+  const newObjects = newState.objects;
+
+  if (newObjects.length > prevObjects.length) {
+    delta.actionType = "added";
+
+    newObjects.forEach((object: any, index: number) => {
+      if (!prevObjects[index]) {
+        delta.object = object;
+      }
+    });
+  }
+
+  if (newObjects.length < prevObjects.length) {
+    delta.actionType = "removed";
+
+    prevObjects.forEach((object: any, index: number) => {
+      if (!newObjects[index]) {
+        delta.object = object;
+      }
+    });
+  }
+
+  if (newObjects.length === prevObjects.length) {
+    delta.actionType = "modified";
+
+    newObjects.forEach((object: any, index: number) => {
+      if (JSON.stringify(object) !== JSON.stringify(prevObjects[index])) {
+        delta.object = object;
+      }
+    });
+  }
+
+  if (newObjects.length === 0) {
+    delta.actionType = "removed";
+    delta.object = prevObjects[0];
+  }
+
+  canvas.fire(`history:${eventType}`, { ...delta });
 };
