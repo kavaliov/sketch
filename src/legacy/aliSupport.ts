@@ -17,75 +17,7 @@ const getImageUrlFromSvg = (html, width, height) => {
   return domUrl.createObjectURL(svg);
 };
 
-export const aliSupport = (): void => {
-  fabric.AnswerImage = fabric.util.createClass(fabric.Image, {
-    type: "answerImage",
-    initialize: function initialize(src, options = {}, fn) {
-      options = { ...options, editable: false };
-
-      // Setup image object to pass along to `fabric.Image`.
-      const image = new Image();
-      image.onload = () => {
-        this.setHeight(this.height || options.height || image.height);
-        this.setWidth(this.width || options.width || image.width);
-        this.setCoords();
-        this.canvas.renderAll();
-      };
-
-      image.src = src;
-
-      this.callSuper("initialize", image, {
-        ...options,
-        width: "",
-        height: "",
-      });
-
-      this.scaleToHeight(options.height || image.height);
-      this.scaleToWidth(options.width || image.width);
-
-      this.setControlsVisibility({
-        bl: true,
-        br: true,
-        mb: false,
-        ml: false,
-        mr: false,
-        mt: false,
-        tl: true,
-        tr: true,
-        mtr: false,
-      });
-
-      this.lockUniScaling = true;
-      this.lockRotation = true;
-      this.set("answerID", options.answerID || "");
-      this.set("scaledSize", {
-        height: options.height || image.height,
-        width: options.width || image.width,
-      });
-      fn && fn(this);
-    },
-    toObject: function toObject() {
-      return {
-        ...this.callSuper("toObject"),
-        answerID: this.get("answerID"),
-        scaledSize: this.get("scaledSize"),
-      };
-    },
-  });
-
-  fabric.AnswerImage.fromObject = function (object, callback) {
-    const answerObject = new fabric.AnswerImage(object.src, object, callback);
-    answerObject.scaleToHeight(object.scaledSize.height);
-    answerObject.scaleToWidth(object.scaledSize.width);
-    return answerObject;
-  };
-
-  fabric.AnswerSvg = fabric.util.createClass(fabric.Image, {
-    type: "answerSvg",
-
-    initialize: function initialize(html: any, options = {}, fn: any) {
-      const fontSize = options.fontSize ? options.fontSize + "px" : "initial";
-      const span = `<span 
+const getHtmlContainer = (options: any, html: any) => `<span 
                       xmlns="http://www.w3.org/1999/xhtml"
                       style="display: inline-block; 
                              width: ${
@@ -93,37 +25,68 @@ export const aliSupport = (): void => {
                              };
                              line-height: 2; 
                              color: ${options.fill || "black"};
-                             font-size: ${fontSize}; 
+                             font-size: ${
+                               options.fontSize
+                                 ? options.fontSize + "px"
+                                 : "initial"
+                             }; 
                              font-family: ${options.fontFamily || "Arial"};"
                     > 
 
                       ${html}
                     </span>`;
 
-      document.getElementsByTagName("body")[0].append();
-      const $tempAnswer = document.createElement("div");
-      $tempAnswer.id = "alisketch-svg-answer";
-      $tempAnswer.innerHTML = span;
-      document.body.appendChild($tempAnswer);
+const getElementSize = (span: any) => {
+  document.getElementsByTagName("body")[0].append();
+  const $tempAnswer = document.createElement("div");
+  $tempAnswer.id = "alisketch-svg-answer";
+  $tempAnswer.innerHTML = span;
+  document.body.appendChild($tempAnswer);
 
-      const tempAnswerRect = $tempAnswer
-        .getElementsByTagName("span")[0]
-        .getBoundingClientRect();
-      const width = Math.ceil(tempAnswerRect.width);
-      const height = Math.ceil(tempAnswerRect.height);
-      $tempAnswer.remove();
+  const tempAnswerRect = $tempAnswer
+    .getElementsByTagName("span")[0]
+    .getBoundingClientRect();
+  $tempAnswer.remove();
 
-      const this$1 = this;
-      options = { ...options, editable: false };
+  return {
+    width: Math.ceil(tempAnswerRect.width),
+    height: Math.ceil(tempAnswerRect.height),
+  };
+};
+
+export const aliSupport = (): void => {
+  fabric.AnswerImage = fabric.util.createClass(fabric.Image, {
+    type: "answerImage",
+    initialize: function initialize(src, options = {}, fn) {
       const image = new Image();
-      image.onload = function () {
-        this$1.setWidth(this$1.width || options.width || image.width);
-        this$1.setHeight(this$1.height || options.height || image.height);
-        this$1.setCoords();
-        this$1.canvas.renderAll();
+      image.src = src;
+
+      this.callSuper("initialize", image, {
+        ...options,
+        erasable: false,
+        width: 0,
+        height: 0,
+        ...(options.width === 0
+          ? { scaleX: 1 }
+          : { scaleX: options.scaleX || options.width / image.width }),
+        ...(options.height === 0
+          ? { scaleY: 1 }
+          : { scaleY: options.scaleY || options.height / image.height }),
+      });
+
+      this.set("answerID", options.answerID || "");
+      fn && fn(this);
+    },
+
+    toObject: function toObject() {
+      return {
+        ...this.callSuper("toObject"),
+        answerID: this.get("answerID"),
       };
-      image.src = getImageUrlFromSvg(span, width, height);
-      this.callSuper("initialize", image, options);
+    },
+
+    _render: function (ctx) {
+      this.callSuper("_render", ctx);
       this.setControlsVisibility({
         bl: true,
         br: true,
@@ -135,11 +98,37 @@ export const aliSupport = (): void => {
         tr: true,
         mtr: false,
       });
+    },
+  });
 
-      this.lockUniScaling = true;
-      this.lockRotation = true;
+  fabric.AnswerImage.fromObject = (object, callback) =>
+    new fabric.AnswerImage(object.src, object, callback);
+
+  fabric.AnswerSvg = fabric.util.createClass(fabric.Image, {
+    type: "answerSvg",
+
+    initialize: function initialize(html: any, options = {}, fn: any) {
+      const span = getHtmlContainer(options, html);
+      const { width, height } = getElementSize(span);
+
+      const image = new Image();
+      image.src = options.src || getImageUrlFromSvg(span, width, height);
+
+      image.onload = () => {
+        if (!options.src) {
+          this.canvas.renderAll();
+        }
+      };
+
+      this.callSuper("initialize", image, {
+        ...options,
+        erasable: false,
+        width,
+        height,
+        ...(options.src ? { src: options.src } : {}),
+      });
+
       this.set("answerID", options.answerID || "");
-      this.set("height", height || "");
       this.set("html", html);
       fn && fn(this);
     },
@@ -147,9 +136,23 @@ export const aliSupport = (): void => {
     toObject: function toObject() {
       return Object.assign(this.callSuper("toObject"), {
         fontFamily: this.get("fontFamily"),
-        height: this.get("height"),
         answerID: this.get("answerID"),
         html: this.get("html"),
+      });
+    },
+
+    _render: function (ctx) {
+      this.callSuper("_render", ctx);
+      this.setControlsVisibility({
+        bl: true,
+        br: true,
+        mb: false,
+        ml: false,
+        mr: false,
+        mt: false,
+        tl: true,
+        tr: true,
+        mtr: false,
       });
     },
   });
@@ -203,7 +206,6 @@ export const aliSupport = (): void => {
       });
     },
   });
-
   fabric.AnswerTextbox.fromObject = (object, callback, forceAsync) => {
     return new fabric.Object._fromObject(
       "AnswerTextbox",

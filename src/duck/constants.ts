@@ -19,41 +19,41 @@ export const CANVAS_SETTINGS = {
 };
 
 export const answers: AnswerType[] = [
-  {
-    id: "57518",
-    sort: 1,
-    type: "textbox",
-    width: 300,
-    height: 0,
-    value:
-      "<b>Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer Answer </b>",
-    options: {
-      fontSize: 16,
-      fontFamily: "Georgia",
-      fill: "black",
-    },
-  },
-  {
-    id: "57519",
-    sort: 1,
-    type: "textbox",
-    width: 0,
-    height: 0,
-    value: "123123",
-    options: {
-      fontSize: 16,
-      fontFamily: "Arial",
-      fill: "black",
-    },
-  },
-  {
-    id: "57520",
-    sort: 1,
-    type: "image",
-    width: 70,
-    height: 70,
-    value:
-      "https://backend25-qa.acceleratelearning.com/system/part_type_graphic_organizer_answer/images/57520/original/pngtree-hand-drawn-little-girl-cartoon-lively-little-girl-cute-little-girl-png-image_491210.jpeg?1628895006",
-    options: { width: 100, height: 100 },
-  },
-];
+         {
+           id: "57518",
+           sort: 1,
+           type: "textbox",
+           width: 300,
+           height: 0,
+           value:
+             "<b>Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer Answer Answer <br /> Answer Answer Answer Answer Answer Answer Answer </b>",
+           options: {
+             fontSize: 16,
+             fontFamily: "Georgia",
+             fill: "black",
+           },
+         },
+         {
+           id: "57519",
+           sort: 1,
+           type: "textbox",
+           width: 0,
+           height: 0,
+           value: "123123",
+           options: {
+             fontSize: 16,
+             fontFamily: "Arial",
+             fill: "black",
+           },
+         },
+         {
+           id: "57520",
+           sort: 1,
+           type: "image",
+           width: 70,
+           height: 70,
+           value:
+             "https://backend25-qa.acceleratelearning.com/system/part_type_graphic_organizer_answer/images/57520/original/pngtree-hand-drawn-little-girl-cartoon-lively-little-girl-cute-little-girl-png-image_491210.jpeg?1628895006",
+           options: { width: 70, height: 70 },
+         },
+       ];

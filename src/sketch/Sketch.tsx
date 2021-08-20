@@ -81,7 +81,7 @@ const Sketch: React.FC<SketchProps> = ({
         dispatch(setAnswers({ answers }));
       }
 
-      sketchRef.current.on("after:render", () => {
+      sketchRef.current.on("state:changed", () => {
         if (typeof onChange === "function") {
           onChange(sketchRef.current.toJSON());
         }

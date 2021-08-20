@@ -1,48 +1,91 @@
 import React from "react";
 import { Button } from "components";
 import { AppContext } from "duck/context";
-import { updateCanvasState, undo, redo } from "./duck/operations";
-import { initialConfig } from "./duck/constants";
-import { HistoryConfig } from "./duck/types";
+import { updateCanvasState, fireEvent } from "./duck/operations";
 import undoIcon from "./assets/undo.svg";
 import redoIcon from "./assets/redo.svg";
 
 const UndoRedo: React.FC = () => {
-  const configRef = React.useRef<HistoryConfig>(initialConfig);
-  const [disabled, setDisabled] = React.useState<any>({
-    undo: true,
-    redo: true,
-  });
+  const allowedRef = React.useRef(true);
   const { canvas } = React.useContext(AppContext);
+  const [history, setHistory] = React.useState<any[]>([canvas.toJSON()]);
+  const [historyIndex, setHistoryIndex] = React.useState<number>(0);
 
   React.useEffect(() => {
-    const canvasStateHandler = () =>
-      updateCanvasState(canvas, configRef.current, setDisabled);
+    // avoiding changing history while object resizing
+    canvas.on("mouse:down", () => {
+      allowedRef.current = false;
+    });
 
-    canvas.on("object:erased", canvasStateHandler);
-    canvas.on("object:modified", canvasStateHandler);
-    canvas.on("object:added", canvasStateHandler);
-    canvas.on("object:removed", canvasStateHandler);
+    canvas.on("mouse:up", () => {
+      allowedRef.current = true;
+    });
+  }, [canvas]);
+
+  React.useEffect(() => {
+    const canvasStateHandler = () => {
+      if (allowedRef.current) {
+        updateCanvasState(
+          canvas,
+          history,
+          historyIndex,
+          setHistory,
+          setHistoryIndex
+        );
+
+        canvas.fire("state:changed", canvas.toJSON());
+      }
+    };
+
+    canvas.on("after:render", canvasStateHandler);
 
     return () => {
-      canvas.off("object:erased", canvasStateHandler);
-      canvas.off("object:modified", canvasStateHandler);
-      canvas.off("object:added", canvasStateHandler);
-      canvas.off("object:removed", canvasStateHandler);
+      canvas.off("after:render", canvasStateHandler);
     };
-  }, [canvas]);
+  }, [canvas, history, setHistoryIndex, historyIndex]);
+
+  const undoHandler = () => {
+    allowedRef.current = false;
+    canvas.loadFromJSON(history[historyIndex - 1], () => {
+      setHistoryIndex(historyIndex - 1);
+      canvas.renderAll();
+      fireEvent(
+        canvas,
+        history[historyIndex],
+        history[historyIndex - 1],
+        "undo"
+      );
+      allowedRef.current = true;
+    });
+  };
+
+  const redoHandler = () => {
+    allowedRef.current = false;
+    canvas.loadFromJSON(history[historyIndex + 1], () => {
+      setHistoryIndex(historyIndex + 1);
+      canvas.renderAll();
+      fireEvent(
+        canvas,
+        history[historyIndex],
+        history[historyIndex + 1],
+        "redo"
+      );
+      allowedRef.current = true;
+    });
+  };
+
+  React.useEffect(() => {
+    console.log(history);
+  }, [history]);
 
   return (
     <>
-      <Button
-        disabled={disabled.undo}
-        onClick={() => undo(canvas, configRef.current, setDisabled)}
-      >
+      <Button disabled={historyIndex === 0} onClick={undoHandler}>
         <img src={undoIcon} alt="" />
       </Button>
       <Button
-        disabled={disabled.redo}
-        onClick={() => redo(canvas, configRef.current, setDisabled)}
+        disabled={historyIndex === history.length - 1}
+        onClick={redoHandler}
       >
         <img src={redoIcon} alt="" />
       </Button>
