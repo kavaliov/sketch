@@ -6,3 +6,4 @@ export { default as ItalicText } from "./italic-text";
 export { default as UnderlineText } from "./underline-text";
 export { default as AlignText } from "./align-text";
 export { default as FontText } from "./font-text";
+export { default as LineBreak } from "./line-break";

@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import { AppContext } from "duck/context";
 import { getPosition } from "./duck/utils";
 import { removeEmptyTextbox } from "./duck/operations";
@@ -12,6 +11,7 @@ import {
   UnderlineText,
   AlignText,
   FontText,
+  LineBreak,
 } from "./components";
 import styles from "./ObjectMenu.module.css";
 
@@ -86,31 +86,28 @@ const ObjectMenu: React.FC = () => {
     });
   }, [canvas]);
 
+  if (!selected) {
+    return null;
+  }
+
   return (
-    <>
-      {selected && (
-        <div
-          style={{ ...position }}
-          className={classNames(styles.wrapper, {
-            [styles.withColorApply]: withColorApply,
-            [styles.withoutCopy]: !withCopy,
-          })}
-        >
-          {withColorApply && <ColorApply />}
-          <RemoveObject />
-          {withCopy && <Copy />}
-          {type === "i-text" && (
-            <>
-              <BoldText />
-              <ItalicText />
-              <UnderlineText />
-              <AlignText />
-              <FontText />
-            </>
-          )}
+    <div style={{ ...position }} className={styles.wrapper}>
+      <div className={styles.headLine}>
+        {withColorApply && <ColorApply />}
+        <RemoveObject />
+        {withCopy && <Copy />}
+        {type === "i-text" && <LineBreak />}
+      </div>
+      {type === "i-text" && (
+        <div className={styles.textSettings}>
+          <BoldText />
+          <ItalicText />
+          <UnderlineText />
+          <AlignText />
+          <FontText />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

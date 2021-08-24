@@ -122,3 +122,25 @@ const changeObjectColor = (object: any, color: string) => {
     object.applyFilters();
   }
 };
+
+export const insertChar = (canvas: FabricType.Canvas, char: string): void => {
+  const activeObject: any = canvas.getActiveObject();
+
+  if (
+    activeObject &&
+    activeObject.type === "i-text" &&
+    activeObject.isEditing
+  ) {
+    const caretStart = activeObject.selectionStart;
+    const caretEnd = activeObject.selectionEnd;
+    activeObject.insertChars(char, null, caretStart, caretEnd);
+    activeObject.set({
+      selectionStart: caretStart + 1,
+      selectionEnd: caretStart + 1,
+    });
+    activeObject.exitEditing();
+    activeObject.enterEditing();
+    activeObject.fire("changed");
+    canvas.renderAll();
+  }
+};

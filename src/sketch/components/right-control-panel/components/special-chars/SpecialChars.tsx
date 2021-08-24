@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "components";
 import { AppContext } from "duck/context";
+import { insertChar } from "duck/operations";
 import charIcon from "./assets/char.svg";
 import { CHARS } from "./duck/constants";
-import { insertChar } from "./duck/operations";
 import styles from "./SpecialChars.module.css";
 
 const SpecialChars: React.FC = () => {

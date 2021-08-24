@@ -1,18 +1,26 @@
 .wrapper {
   position: absolute;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transform: translateX(-50%);
-  gap: 8px;
-  justify-items: center;
   z-index: 50;
+  padding: 8px;
 
-  &.withColorApply {
-    grid-template-columns: repeat(3, 1fr);
+  .headLine {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 8px;
+
+    & > * {
+      margin-right: 8px;
+    }
   }
 
-  &.withoutCopy {
-    grid-template-columns: repeat(1, 1fr);
+  .textSettings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    justify-items: center;
   }
 }

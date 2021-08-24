@@ -74,10 +74,6 @@ const UndoRedo: React.FC = () => {
     });
   };
 
-  React.useEffect(() => {
-    console.log(history);
-  }, [history]);
-
   return (
     <>
       <Button disabled={historyIndex === 0} onClick={undoHandler}>
