@@ -7,7 +7,7 @@ export type Mode = "drawing" | "hand";
 
 export type BrushType = "eraser" | "marker" | "magic" | "pencil" | "pen" | "";
 
-export interface AppContext {
+export interface SketchContext {
   canvas: FabricType.Canvas;
   state: State;
   dispatch: AnyDispatch;

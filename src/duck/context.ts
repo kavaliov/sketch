@@ -1,4 +1,6 @@
 import * as React from "react";
-import { AppContext as AppContextType } from "./types";
+import { SketchContext as SketchContextType } from "./types";
 
-export const AppContext = React.createContext<AppContextType>(null as any);
+export const SketchContext = React.createContext<SketchContextType>(
+  null as any
+);

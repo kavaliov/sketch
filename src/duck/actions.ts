@@ -1,42 +1,46 @@
-import { createAction } from "typesafe-actions";
+import { createStandardAction } from "typesafe-actions";
 import { Mode, BrushType, AnswerType } from "./types";
 
-export const setCurrentColor = createAction("SKETCH/SET_CURRENT_COLOR")<{
+export const setCurrentColor = createStandardAction(
+  "SKETCH/SET_CURRENT_COLOR"
+)<{
   currentColor: string;
 }>();
 
-export const setMode = createAction("SKETCH/SET_MODE")<{
+export const setMode = createStandardAction("SKETCH/SET_MODE")<{
   mode: Mode;
 }>();
 
-export const setBrush = createAction("SKETCH/SET_BRUSH")<{
+export const setBrush = createStandardAction("SKETCH/SET_BRUSH")<{
   brushType: BrushType;
 }>();
 
-export const setFullscreen = createAction("SKETCH/SET_FULLSCREEN")<{
+export const setFullscreen = createStandardAction("SKETCH/SET_FULLSCREEN")<{
   fullscreen: boolean;
 }>();
 
-export const setWidth = createAction("SKETCH/SET_WIDTH")<{
+export const setWidth = createStandardAction("SKETCH/SET_WIDTH")<{
   width: number;
 }>();
 
-export const setHeight = createAction("SKETCH/SET_HEIGHT")<{
+export const setHeight = createStandardAction("SKETCH/SET_HEIGHT")<{
   height: number;
 }>();
 
-export const setAnswers = createAction("SKETCH/SET_ANSWERS")<{
+export const setAnswers = createStandardAction("SKETCH/SET_ANSWERS")<{
   answers: AnswerType[];
 }>();
 
-export const setUsedAnswers = createAction("SKETCH/SET_USED_ANSWERS")<{
+export const setUsedAnswers = createStandardAction("SKETCH/SET_USED_ANSWERS")<{
   usedAnswers: string[];
 }>();
 
-export const addUsedAnswer = createAction("SKETCH/ADD_USED_ANSWER")<{
+export const addUsedAnswer = createStandardAction("SKETCH/ADD_USED_ANSWER")<{
   usedAnswer: string;
 }>();
 
-export const removeUsedAnswer = createAction("SKETCH/REMOVE_USED_ANSWER")<{
+export const removeUsedAnswer = createStandardAction(
+  "SKETCH/REMOVE_USED_ANSWER"
+)<{
   usedAnswer: string;
 }>();
